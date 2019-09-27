@@ -1,9 +1,9 @@
 <h1 align="center">
-  Ceres Admin
+  xWall-web
 </h1>
 
 <h4 align="center">
-	后台管理系统模版
+	xWall 工业防火墙 2.0
 </h4>
 
 
@@ -18,8 +18,8 @@ npm run lint # 格式化 & 修复
 npm run commit # 自动化 git commit
 
 # pm2 相关
-npm run start # pm2 启动已指定的项目(即 pm2 start app.js --name='ceres-admin') 
-npm run stop # pm2 关闭已指定的项目(即 pm2 delete ceres-admin) 
+npm run start # pm2 启动已指定的项目(即 pm2 start app.js --name='xWall-web') 
+npm run stop # pm2 关闭已指定的项目(即 pm2 delete xWall-web) 
 npm run restart # pm2 重启已指定的项目
 npm run buildart # 重新编译，并使用pm2 重启已指定的项目
 ```
@@ -161,9 +161,3 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 </style>
 ```
-
-
-## 后续计划
-基于 TypeScript重构 ceres-admin项目，参考[TypeScript + 大型项目实战](https://juejin.im/post/5b54886ce51d45198f5c75d7#heading-3)
-
-
