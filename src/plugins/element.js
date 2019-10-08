@@ -22,7 +22,8 @@ import {
   Row,
   Col,
   Form,
-  FormItem
+  FormItem,
+  Card
 } from 'element-ui'
 import { loadPlugins } from '../utils/index'
 
@@ -51,4 +52,5 @@ loadPlugins([
   Col,
   Form,
   FormItem,
+  Card
 ])
