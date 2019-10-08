@@ -4,12 +4,15 @@
 import Layout from 'comps/layout/t-type'
 import Midlayer from 'comps/layout/midlayer'
 /* Router Modules */
-import homeRouter from './modules/home'
-import adminRouter from './modules/admin'
-import aboutRouter from './modules/about'
-import chartRouter from './modules/chart'
-import formRouter from './modules/form'
-import tableRouter from './modules/table'
+import systemRouter from './modules/system'
+import ddosRouter from './modules/ddos'
+import ipfwRouter from './modules/ipfw'
+import ipmacRouter from './modules/ipmac'
+import networkRouter from './modules/network'
+import netflowRouter from './modules/netflow'
+import logRouter from './modules/log'
+import userRouter from './modules/user'
+import systemadminRouter from './modules/systemadmin'
 // lazy-loaded when the route is visited
 // const _import = file => () => import(/* webpackChunkName: "about" */ `@/views/${file}.vue`)
 const _import = file => () => import(`@/views/${file}.vue`)
@@ -41,20 +44,19 @@ function processRouterWithTemplate(rawRouter) {
 }
 // 处理「业务页面」的路由
 const viewRouters = [
-  homeRouter,
-  aboutRouter,
-  adminRouter,
-  chartRouter,
-  formRouter,
-  tableRouter,
+  systemRouter,
+  ddosRouter,
+  ipfwRouter,
+  ipmacRouter,
+  networkRouter,
+  netflowRouter,
+  logRouter,
+  userRouter,
+  systemadminRouter
 ].map(item => processRouterWithTemplate(item))
 
 const routes = [
   ...viewRouters,
-  // 数据大屏页面
-  { path: '/data-graph/overview', component: _import('data-graph/overview/index'), meta: { title: '全国高等院校分布' }, hidden: true },
-  { path: '/data-graph/college-list', component: _import('data-graph/college-list/index'), meta: { title: '高等高校详情介绍' }, hidden: true },
-  { path: '/data-graph/college-detail', component: _import('data-graph/college-detail/index'), meta: { title: '高等高校详情介绍' }, hidden: true },
   // 以下非「业务页面」
   { path: '/login', component: _import('login/index'), hidden: true },
   { path: '/404', component: _import('error-page/404'), hidden: true },
