@@ -12,6 +12,7 @@
           <i class="el-icon-caret-left" :class="{rotate: foldState}"></i>
         </div>
         <el-main class="main">
+          <HistoryTag />
           <AppMain />
         </el-main>
       </el-container>
@@ -21,6 +22,7 @@
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
+import HistoryTag from 'comps/base/HistoryTag'
 import ResizeMixin from '../mixin/resize'
 import AppMain from './components/AppMain'
 import SideBar from './components/SideBar'
@@ -31,6 +33,7 @@ export default {
     AppMain,
     SideBar,
     NavBar,
+    HistoryTag,
   },
   mixins: [ResizeMixin],
   computed: {
@@ -72,6 +75,7 @@ export default {
 .header {
   display flex
   align-items center
+  width 100%
   padding 0
   box-shadow 0px 2px 6px 0px rgba(190, 204, 216, 0.4)
 }

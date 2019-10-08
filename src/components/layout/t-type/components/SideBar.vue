@@ -1,9 +1,5 @@
 <template>
   <div class="sidebar">
-    <router-link class="logo" to="/">
-      <img v-if="!isCollapse" class="name" src="../../../../assets/images/company/name.png" alt="">
-      <img v-else class="brand" src="../../../../assets/images/company/logo.png" alt="">
-    </router-link>
     <el-menu style="margin-bottom:50px" :default-active="defaultActive" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
       <template v-for="item in routes">
         <!-- 一级菜单(不含二级菜单) -->
@@ -64,6 +60,8 @@ export default {
     routes() {
       let { routes } = this.$router.options
       let sidebarList = routes.filter(item => item.hidden !== true)
+      console.log('sidebarList', sidebarList)
+      console.log('flatten', flatten(sidebarList))
       return flatten(sidebarList)
     },
     isCollapse() {
@@ -102,24 +100,6 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .sidebar {
-  .logo {
-    position sticky
-    top 0
-    left 0
-    z-index 99
-    height $header-height
-    display flex
-    justify-content center
-    align-items center
-    background-color #fff
-    .name {
-      width 148px
-      transition height 0, width 0.3s linear // all 0.3s linear
-    }
-    .brand {
-      width 40px
-      transition height 0, width 0.3s linear
-    }
-  }
+
 }
 </style>
