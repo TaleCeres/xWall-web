@@ -29,19 +29,22 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .container {
+  margin-bottom 20px
+  border-radius 4px
   position relative
-  background url('./panel.png') center no-repeat
+  background-color #fff
   background-size 100% 100%
   overflow hidden
-  height 100%
-  color $color-white
+  height 240px
+  box-shadow 0 2px 12px 0 rgba(0,0,0,.1)
   .title {
+    padding-left 20px
+    font-weight bolder
     position relative
-    top 10px
-    left 15px
     height 40px
     line-height 40px
-    font-size 20px
+    font-size 18px
+    border-bottom 1px solid #f3f3f3
   }
 }
 </style>
