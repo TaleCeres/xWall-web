@@ -1,7 +1,8 @@
 const _import = file => () => import(`@/views/${file}.vue`)
 
 export default {
-  path: '/system',
+  path: '/',
+  redirect: '/system/index',
   name: 'System',
   component: undefined,
   meta: {
