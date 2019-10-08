@@ -56,6 +56,25 @@ const viewRouters = [
 ].map(item => processRouterWithTemplate(item))
 
 const routes = [
+  {
+    path: '/',
+    name: 'Dashboard',
+    redirect: '/dashboard/index',
+    component: Layout,
+    meta: {
+      title: '系统信息',
+      icon: 'el-icon-s-grid',
+    },
+    hidden: true,
+    children: [
+      {
+        path: '/dashboard/index',
+        component: _import('dashboard/index'),
+        name: 'DashboardIndex',
+        meta: { title: '系统信息', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
   ...viewRouters,
   // 以下非「业务页面」
   { path: '/login', component: _import('login/index'), hidden: true },

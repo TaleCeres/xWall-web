@@ -23,6 +23,6 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .container
   width 100%
-  height 100%
+  // height 100%
   text-align left
 </style>

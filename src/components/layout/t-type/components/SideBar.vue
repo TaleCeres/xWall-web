@@ -2,8 +2,16 @@
   <div class="sidebar">
     <el-menu style="margin-bottom:50px" :default-active="defaultActive" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
       <template v-for="item in routes">
+        <!-- 一级菜单(不含二级菜单) -->
+        <router-link v-if="!canUnflod(item)" :key="item.name" :to="item.path">
+          <el-menu-item :index="item.name">
+            <i :class="item.meta.icon"></i>
+            <span slot="title">{{ item.meta.title }}</span>
+          </el-menu-item>
+        </router-link>
+
         <!-- 一级菜单(含二级菜单) -->
-        <el-submenu v-if="item.children" :key="item.name" :index="item.name">
+        <el-submenu v-else :key="item.name" :index="item.name">
           <template slot="title">
             <i :class="item.meta.icon"></i>
             <span>{{ item.meta.title }}</span>
@@ -31,14 +39,6 @@
             </router-link>
           </template>
         </el-submenu>
-        <!-- 一级菜单(不含二级菜单) -->
-        <router-link v-else :key="item.name" :to="item.path">
-          <el-menu-item :index="item.name">
-            <i :class="item.meta.icon"></i>
-            <span slot="title">{{ item.meta.title }}</span>
-          </el-menu-item>
-        </router-link>
-
       </template>
     </el-menu>
   </div>
@@ -60,6 +60,8 @@ export default {
     routes() {
       let { routes } = this.$router.options
       let sidebarList = routes.filter(item => item.hidden !== true)
+      console.log('sidebarList', sidebarList)
+      console.log('flatten', flatten(sidebarList))
       return flatten(sidebarList)
     },
     isCollapse() {
@@ -74,6 +76,10 @@ export default {
     // this._testRouterAttrs()
   },
   methods: {
+    canUnflod(route) {
+      if (route.children && route.children.length === 1 && !route.children.children) return false
+      return true
+    },
     handleOpen(key, keyPath) {
       // 打开&关闭 el-menu
       // console.log(key, keyPath)
@@ -94,24 +100,6 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .sidebar {
-  .logo {
-    position sticky
-    top 0
-    left 0
-    z-index 99
-    height $header-height
-    display flex
-    justify-content center
-    align-items center
-    background-color #fff
-    .name {
-      width 148px
-      transition height 0, width 0.3s linear // all 0.3s linear
-    }
-    .brand {
-      width 40px
-      transition height 0, width 0.3s linear
-    }
-  }
+
 }
 </style>
