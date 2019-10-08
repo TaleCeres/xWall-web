@@ -60,8 +60,6 @@ export default {
     routes() {
       let { routes } = this.$router.options
       let sidebarList = routes.filter(item => item.hidden !== true)
-      console.log('sidebarList', sidebarList)
-      console.log('flatten', flatten(sidebarList))
       return flatten(sidebarList)
     },
     isCollapse() {
