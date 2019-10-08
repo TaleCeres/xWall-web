@@ -11,7 +11,7 @@ export default {
   children: [
     {
       path: '/netflow/ipflow',
-      component: _import('net-flow/IpFlow'),
+      component: _import('net-flow/ip-flow'),
       name: 'IpFlow',
       meta: { title: 'IP流量统计', icon: 'fa fa-cog' },
     },

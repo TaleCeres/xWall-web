@@ -11,13 +11,13 @@ export default {
   children: [
     {
       path: '/system/ip',
-      component: _import('system-admin/IpConfig'),
+      component: _import('system-admin/ip-config'),
       name: 'ipConfig',
       meta: { title: '管理IP设置', icon: 'fa fa-cog' },
     },
     {
       path: '/system/reboot',
-      component: _import('system-admin/Reboot'),
+      component: _import('system-admin/reboot'),
       name: 'Reboot',
       meta: { title: '重启设备', icon: 'fa fa-cog' },
     },
