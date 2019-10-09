@@ -61,17 +61,7 @@ export default class User {
 
   // 获取用户列表(管理员admin才有权限)
   static async getUserList() {
-    // const userList = await get('configCentre/api/user')
-    // return userList
-    return [
-      {
-        username: 'support@gushenxing.com',
-        role: 'user',
-      },
-      {
-        username: 'mohan@gushenxing.com',
-        role: 'admin'
-      }
-    ]
+    const { data: userList } = await get('configCentre/api/user')
+    return userList
   }
 }
