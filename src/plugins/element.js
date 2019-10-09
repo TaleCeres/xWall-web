@@ -24,9 +24,10 @@ import {
   Form,
   FormItem,
   Card,
+  Dialog,
+  Switch,
   DatePicker,
-  Pagination,
-  Dialog
+  Pagination
 } from 'element-ui'
 import {
   loadPlugins
@@ -58,6 +59,7 @@ loadPlugins([
   Form,
   FormItem,
   Card,
+  Switch,
   DatePicker,
   Pagination,
   Dialog

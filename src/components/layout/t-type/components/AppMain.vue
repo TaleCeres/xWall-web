@@ -22,7 +22,7 @@ export default {
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .container
-  width 100%
+  padding 10px
   /*height 100%*/
   text-align left
 </style>
