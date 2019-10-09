@@ -7,7 +7,7 @@ import { getToken } from './cookie'
 // 创建请求实例
 const _axios = axios.create({
   // baseURL: 'http://192.168.1.124:3001',
-  baseURL: 'http://192.168.1.124:8080',
+  baseURL: 'http://192.168.1.124:8081',
   timeout: 5000 // request timeout
 })
 
@@ -42,7 +42,10 @@ _axios.interceptors.response.use(response => {
   }
   return data
   }, error => {
-    const { message } = error.response.data
+    let message = undefined
+    if (error.response) {
+      message = error.response.data
+    }
     Notification({
       message: message || '服务端异常',
       type: 'warning',

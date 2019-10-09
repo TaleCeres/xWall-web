@@ -11,14 +11,14 @@ export default {
   children: [
     {
       path: '/netflow/ipflow',
-      component: _import('net-flow/ip-flow'),
-      name: 'IpFlow',
+      component: _import('netflow/ip-flow'),
+      name: 'NetflowIpFlow',
       meta: { title: 'IP流量统计', icon: 'fa fa-cog' },
     },
     {
       path: '/netflow/history',
-      component: _import('net-flow/index'),
-      name: 'FlowIndex',
+      component: _import('netflow/history'),
+      name: 'NetflowHistory',
       meta: { title: '流量历史统计', icon: 'fa fa-cog' },
     },
   ],

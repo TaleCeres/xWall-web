@@ -27,9 +27,11 @@ import {
   Dialog,
   Switch,
   DatePicker,
-
+  Pagination
 } from 'element-ui'
-import { loadPlugins } from '../utils/index'
+import {
+  loadPlugins
+} from '../utils/index'
 
 loadPlugins([
   Icon,
@@ -57,7 +59,8 @@ loadPlugins([
   Form,
   FormItem,
   Card,
-  Dialog,
   Switch,
   DatePicker,
+  Pagination,
+  Dialog
 ])
