@@ -22,6 +22,7 @@
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
+import UserModel from '@/models/user'
 import HistoryTag from 'comps/base/HistoryTag'
 import ResizeMixin from '../mixin/resize'
 import AppMain from './components/AppMain'
@@ -52,7 +53,9 @@ export default {
       return this.isCollapse === false ? '170px' : '64px'
     },
   },
-  mounted() {
+  async created() {
+    const user = await UserModel.getToken('support@gushenxing.com', 'gushenxing123')
+    this.$store.dispatch('user/setUser', user)
   },
   methods: {
     toggleSlidebarState() {

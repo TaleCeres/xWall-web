@@ -5,7 +5,8 @@ import { removeToken } from '@/utils/cookie'
 
 const state = {
   logined: false, // 是否登录
-  user: null, // 当前用户
+  username: null, // 当前用户
+  auth: 'admin', // 普通用户和管理员(admin)
 }
 
 const getters = {}
@@ -14,21 +15,21 @@ const mutations = {
   SET_LOGINED(state, isLogined) {
     state.logined = isLogined
   },
-  SET_USER(state, data) {
-    state.user = data
+  SET_USERNAME(state, username) {
+    state.username = username
   },
-  // SET_USER_AUTH(state, auth) {
-  //   state.auth = auth
-  // }
+  SET_USER_AUTH(state, auth) {
+    state.auth = auth
+  }
 }
 
 const actions = {
   setUser({ commit }, user) {
-    // console.log('commit', commit)
     commit('SET_LOGINED', true)
-    let { nick_name, wx_nick, email, modify_limit, auth } = user
-    commit('SET_USER', { nick_name, wx_nick, email, modify_limit, auth })
-    // commit('SET_USER_AUTH', user.auth)
+
+    let { username, role: auth } = user
+    commit('SET_USERNAME', username)
+    commit('SET_USER_AUTH', auth)
   },
   logout({ commit }) {
     removeToken()

@@ -1,12 +1,11 @@
 import cookies from 'js-cookie'
-import { Base64 } from 'js-base64'
-
+const defaultToken = 'connect.sid=s%3AM0MNEu1xTCVVdDwd4ZlBrHQIQFAvxAJW.Qaj1nXg3RvCKVVOOTr3hCTBGzNJbaohZl9FG%2B7j6sxo; Path=/; HttpOnly'
 /**
  * 存储tokens
  * @param {string} token
  */
-export function saveToken(token) {
-  cookies.set('token', `Basic ${Base64.encode(`${token}:randomPassword`)}`)
+export function saveToken(token = defaultToken) {
+  cookies.set('token', token)
 }
 
 /**
