@@ -4,6 +4,17 @@ import {
   put,
 } from '@/utils/request'
 
+
+function processSystemLogList(list) {
+  return list.map(item => {
+    let [time, event] = item.split('[info]:').map(el => el.trim())
+    return {
+      time, 
+      event
+    }
+  })
+}
+
 export default class Log {
   /**
    * 获取防火墙日志列表
@@ -70,6 +81,38 @@ export default class Log {
           }
         ]
       }
+    }
+  }
+
+  
+  /**
+   * 获取某个区间段内的系统日志
+   * @static
+   * @param {*} from 开始时间: "2019/09/01"
+   * @param {*} end 结束时间: "2019/09/02"
+   * @returns 
+            [ 
+              {
+                time: "2019/9/26 4:19:23 PM",
+                event: "Express server listening on port 3001"
+              }
+            ]
+   */
+  static async getSystemLog(from, end) {
+    // const data = await post('configCentre/api/events', {
+    //   from,
+    //   end
+    // })
+    const data = [
+      '2019/9/26 4:19:23 PM [info]: Express server listening on port 3001',
+      '2019/9/30 1:29:29 PM [info]: Express server listening on port 3001'
+    ]
+    return processSystemLogList(data)
+  }
+
+  static async backupSystemLog() {
+    return {
+      msg: "remove Log: complete"
     }
   }
 }
