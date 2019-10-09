@@ -1,10 +1,10 @@
 <template>
-  <div>修改密码</div>
+  <div>创建新用户</div>
 </template>
 
 <script>
 export default {
-  name: 'ResetPassword'
+  name: 'UserAdd'
 }
 </script>
 

@@ -4,21 +4,17 @@ import store from '@/store'
 import { Notification } from 'element-ui'
 import { getToken } from './cookie'
 
-// 拦截器，使用mock数据代替
-let interceptorList = [
-  'get+user'
-]
-
 // 创建请求实例
 const _axios = axios.create({
-  baseURL: 'https://api.izjgk.com/v1',
+  // baseURL: 'http://192.168.1.124:3001',
+  baseURL: 'http://192.168.1.124:8080/configCentre',
   timeout: 5000 // request timeout
 })
 
 // request 拦截
 _axios.interceptors.request.use(
   config => {
-    config.headers['Authorization'] = getToken()
+    config.headers['token'] = getToken()
     return config
   },
   error => {
@@ -28,19 +24,32 @@ _axios.interceptors.request.use(
 
 // request 拦截
 _axios.interceptors.response.use(response => {
-  const res = response.data
-  // 成功的error_code为0，其他都是
-  if (res.error_code >= 100) {
+  const { 
+    status, 
+    message, 
+    data
+  } = response
+  handleLoginRes(response, data)
+  
+  if (status > 200) {
     Notification({
-      message: res.msg || '服务端异常',
+      message: message || '服务端异常',
       type: 'warning',
       duration: 5 * 1000
     })
-    return Promise.reject(res.msg || '服务端异常')
+    // return Promise.reject(response.message || '服务端异常')
+    return message || '服务端异常'
   }
-  return res.data
+  return data
   }, error => {
-    return Promise.reject(error)
+    const { message } = error.response.data
+    Notification({
+      message: message || '服务端异常',
+      type: 'warning',
+      duration: 5 * 1000
+    })
+    // return Promise.reject(message)
+    return message || '服务端异常'
   },
 )
 
@@ -94,6 +103,18 @@ export function _delete(url, params = {}) {
     url,
     params,
   })
+}
+
+function handleLoginRes(res, data) {
+  const { 
+    baseURL, 
+    url: intactURL, 
+    method,
+    headers: {
+      token
+    }
+  } = res.config
+  if (intactURL.split(baseURL)[1] === '/login' && method === 'post') data.token = token
 }
 
 export default _axios
