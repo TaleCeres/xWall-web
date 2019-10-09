@@ -44,15 +44,15 @@ function processRouterWithTemplate(rawRouter) {
 }
 // 处理「业务页面」的路由
 const viewRouters = [
-  systemRouter,
-  ddosRouter,
-  ipfwRouter,
-  ipmacRouter,
-  networkRouter,
-  netflowRouter,
-  logRouter,
-  userRouter,
-  systemadminRouter
+  systemRouter, // 全局配置
+  ddosRouter, // 抗DDOS设置
+  ipfwRouter, // IP层规则
+  ipmacRouter, // 地址绑定
+  networkRouter, // 网络设置
+  netflowRouter, // 网络状态
+  logRouter, // 日志审计
+  userRouter, // 用户管理
+  systemadminRouter // 系统管理
 ].map(item => processRouterWithTemplate(item))
 
 const routes = [
