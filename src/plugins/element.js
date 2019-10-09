@@ -24,7 +24,10 @@ import {
   Form,
   FormItem,
   Card,
+  Dialog,
+  Switch,
   DatePicker,
+
 } from 'element-ui'
 import { loadPlugins } from '../utils/index'
 
@@ -54,5 +57,7 @@ loadPlugins([
   Form,
   FormItem,
   Card,
-  DatePicker
+  Dialog,
+  Switch,
+  DatePicker,
 ])

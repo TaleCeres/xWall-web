@@ -60,7 +60,5 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.dashboard {
-  padding 10px
-}
+
 </style>

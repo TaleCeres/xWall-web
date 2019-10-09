@@ -1,5 +1,5 @@
 <template>
-  <div>IP流量统计</div>
+  <div class="ip-flow-box">IP流量统计</div>
 </template>
 
 <script>

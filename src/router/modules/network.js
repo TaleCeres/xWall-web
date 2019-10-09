@@ -3,6 +3,7 @@ const _import = file => () => import(`@/views/${file}.vue`)
 export default {
   path: '/network',
   name: 'Network',
+  redirect: '/network/index',
   component: undefined,
   meta: {
     title: '网络设置',
