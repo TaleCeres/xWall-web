@@ -35,8 +35,8 @@ export default {
     },
     // 备份「系统日志」，前端发送指令，服务器自动完成
     async backupSystemLog() {
-
-    }
+      await LogModel.backupSystemLog()
+    },
   }
 }
 </script>
