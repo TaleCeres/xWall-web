@@ -13,7 +13,7 @@ export default class User {
    * @param {*} password 密码
    */
   static async getToken(username, password) {
-    const data = await post('login', {
+    const data = await post('configCentre/login', {
       username,
       password
     })
@@ -22,7 +22,7 @@ export default class User {
   }
 
   static async login(username, password) {
-    const data = await post('login', {
+    const data = await post('configCentre/login', {
       username,
       password
     })
@@ -32,13 +32,13 @@ export default class User {
 
   // 登出
   static async logout() {
-    const data = await get('logout')
+    const data = await get('configCentre/logout')
     return data
   }
 
   // 创建用户
   static async createUser(username, password, role) {
-    const data = await post('api/user', {
+    const data = await post('configCentre/api/user', {
       username, password, role
     })
     return data
@@ -46,14 +46,14 @@ export default class User {
 
   // 删除用户
   static async deleteUser(username) {
-    const data = await post('api/userdelete', {
+    const data = await post('configCentre/api/userdelete', {
     })
     return data
   }
 
   // 修改用户(目前只能修改密码)
   static async updateUser(username, password) {
-    const data = await post('api/user/password', {
+    const data = await post('configCentre/api/user/password', {
       username, 
       password
     })
