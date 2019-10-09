@@ -23,7 +23,8 @@ import {
   Col,
   Form,
   FormItem,
-  Card
+  Card,
+  DatePicker,
 } from 'element-ui'
 import { loadPlugins } from '../utils/index'
 
@@ -52,5 +53,6 @@ loadPlugins([
   Col,
   Form,
   FormItem,
-  Card
+  Card,
+  DatePicker
 ])
