@@ -11,7 +11,7 @@
         <div class="icon-font side-btn" :style="{left: sidebarWidth}" @click="toggleSlidebarState">
           <i class="el-icon-caret-left" :class="{rotate: foldState}"></i>
         </div>
-        <el-main class="main">
+        <el-main class="main" :style="{marginLeft: sidebarWidth}">
           <HistoryTag />
           <AppMain />
         </el-main>
@@ -67,9 +67,12 @@ export default {
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .aside {
+  position fixed
+  top 60px
+  height 100%
   border 1px solid red
   overflow-x hidden
-  position relative
+  // position relative
   &::-webkit-scrollbar {
     width 0px
     height 0px
@@ -77,10 +80,13 @@ export default {
 }
 .header {
   display flex
+  z-index 101
+  position fixed
   align-items center
   width 100%
   padding 0
   box-shadow 0px 2px 6px 0px rgba(190, 204, 216, 0.4)
+  background-color #3D444E
 }
 .do-slide {
   position absolute
@@ -112,6 +118,7 @@ export default {
   transition all 0.3s linear
 }
 .main {
-  margin 2px 0 0 2px // 避免过于紧凑
+  margin 60px 0 0 2px // 避免过于紧凑
+  transition all 0.3s linear
 }
 </style>

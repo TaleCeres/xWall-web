@@ -7,8 +7,6 @@
       </router-link>
     </div>
     <div class="right-menu">
-    <DigitalClock style="margin-right: 15px;"/>
-    <Screenfull style="margin-right: 15px;"/>
     <UserCard style="margin-right: 10px;"/>
     </div>
   </nav>
