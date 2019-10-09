@@ -42,7 +42,10 @@ _axios.interceptors.response.use(response => {
   }
   return data
   }, error => {
-    const { message } = error.response.data
+    let message = undefined
+    if (error.response) {
+      message = error.response.data
+    }
     Notification({
       message: message || '服务端异常',
       type: 'warning',

@@ -13,42 +13,41 @@
   </div>
 </template>
 
-<script>
-  import User from '@/models/user'
-  export default {
-    name: 'UserList',
-    data() {
-      return {
-        dataList: [{
-          username: 'admin',
-          role: '管理员'
-        }, {
-          username: 'auditor',
-          role: '用户'
-        }]
-      }
-    },
-    created() {
-      this.getUser()
-    },
-    methods: {
-      getUser() {
-        User.getUserList().then((res) => {
-        this.dataList=res
-        })
-      }
-    },
-  }
+<script type="text/ecmascript-6">
+import User from '@/models/user'
+export default {
+  name: 'UserList',
+  data() {
+    return {
+      dataList: [{
+        username: 'admin',
+        role: '管理员'
+      }, {
+        username: 'auditor',
+        role: '用户'
+      }]
+    }
+  },
+  created() {
+    this.getUser()
+  },
+  methods: {
+    getUser() {
+      User.getUserList().then(res => {
+        this.dataList = res
+      })
+    }
+  },
+}
 </script>
 
 <style scoped lang="stylus">
-  .user-container {
-    margin: 30px
-  }
-
-  .el-icon-delete {
-    background-color: #6F060b;
-    color: #ffffff;
-    padding: 2px
-  }
+.user-container {
+  margin 30px
+}
+.el-icon-delete {
+  background-color #6F060b
+  color #ffffff
+  padding 2px
+}
 </style>
