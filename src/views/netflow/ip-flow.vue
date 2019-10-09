@@ -1,14 +1,24 @@
 <template>
   <div>
-    <h2>IP流量统计</h2>
-    {{ src }}
+    <el-row style="padding: 20px 10px">
+      <el-col :span="12">
+        <NetflowPieChart id='src' title="源IP流量TOP10" :chart-data="src"></NetflowPieChart>
+      </el-col>
+      <el-col :span="12">
+        <NetflowPieChart id='dst' title="目的IP流量TOP10" :chart-data="dst"></NetflowPieChart>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 import NetflowModel from '@/models/netflow'
+import NetflowPieChart from './components/NetflowPieChart'
 export default {
   name: 'NetflowIpFlow',
+  components: {
+    NetflowPieChart
+  },
   data() {
     return {
       src: undefined,
