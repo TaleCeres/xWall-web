@@ -46,9 +46,8 @@ export default class User {
 
   // 删除用户
   static async deleteUser(username) {
-    const data = await post('configCentre/api/userdelete', {
-    })
-    return data
+    const userList = await post('configCentre/api/userdelete', [username])
+    return userList
   }
 
   // 修改用户(目前只能修改密码)
