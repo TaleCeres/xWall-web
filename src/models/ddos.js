@@ -48,8 +48,8 @@ export default class User {
       }
    */
   static async setDDOS(prevention) {
-    // const data = await post('xWall/api/sensor', prevention)
-    // return data
-    return prevention
+    const data = await post('xWall/api/sensor', prevention)
+    return data
+    // return prevention
   }
 }

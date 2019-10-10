@@ -13,6 +13,7 @@ import netflowRouter from './modules/netflow'
 import logRouter from './modules/log'
 import userRouter from './modules/user'
 import systemadminRouter from './modules/systemadmin'
+import srcipRouter from './modules/srcip'
 // lazy-loaded when the route is visited
 // const _import = file => () => import(/* webpackChunkName: "about" */ `@/views/${file}.vue`)
 const _import = file => () => import(`@/views/${file}.vue`)
@@ -47,12 +48,13 @@ const viewRouters = [
   systemRouter, // 全局配置
   ddosRouter, // 抗DDOS设置
   ipfwRouter, // IP层规则
-  ipmacRouter, // 地址绑定
+  srcipRouter, //　源IP设置
+  // ipmacRouter, // 地址绑定
   networkRouter, // 网络设置
   netflowRouter, // 网络状态
   logRouter, // 日志审计
   userRouter, // 用户管理
-  systemadminRouter // 系统管理
+  systemadminRouter, // 系统管理,
 ].map(item => processRouterWithTemplate(item))
 
 const routes = [

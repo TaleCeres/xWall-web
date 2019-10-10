@@ -38,6 +38,7 @@ export default {
             name: '流量',
             data: this.chartData,
             type: 'pie',
+            radius: [0, '50%'],
             label: {
               normal: {
                 show: true,

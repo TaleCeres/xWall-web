@@ -3,7 +3,7 @@
     <div class="title">DDOS</div>
     <div class="table-box">
       <el-table border size="medium"
-                header-row-class-name="table-title"
+                header-row-class-nam="table-title"
                 cell-class-name ='table-cell'
                 :data="list"
                 style="width: 100%">
@@ -97,6 +97,7 @@ export default {
       list: [],
       dialogFormVisible: false,
       commonAttacksPreventions: ['land', 'syn', 'udp', 'icmp', 'portscan', 'pingofdeath', 'teardrop'],
+      param: {},
       ddos: {
         land: false,
         syn: false,
@@ -115,26 +116,36 @@ export default {
     async getData() {
       let { list, ddos } = this
       let data = await ddosModel.getDDOS()
-      console.log('getDDOS', data)
-      let arr = data[0].commonAttacksPrevention
+      let param = data[0]
+      this.param = param
+      let arr = param.commonAttacksPrevention ? param.commonAttacksPrevention : []
       let info = {}
       this.commonAttacksPreventions.forEach(item => {
         console.log(item)
         if (arr.includes(item)) {
           ddos[`${item}`] = true
-          info[`${item}`] = ddos[`${item}`] === true ? '开启' : '关闭'
+          info[`${item}`] = '开启'
+        } else {
+          ddos[`${item}`] = false
+          info[`${item}`] = '关闭'
         }
       })
       list.push(info)
       this.list = list
       this.ddos = ddos
-      console.log(this.ddos)
     },
     async handleEdit(index, row) {
       this.dialogFormVisible = true
     },
     async handleUpdate() {
       // 处理数据
+      let { ddos, param, commonAttacksPreventions } = this
+      let arr = []
+      commonAttacksPreventions.forEach(item => {
+        if (ddos[item] === true) { arr.push(item) }
+      })
+      param.commonAttacksPrevention = arr
+      let data = await ddosModel.setDDOS(param)
       this.dialogFormVisible = false
     }
   }
@@ -144,7 +155,7 @@ export default {
 <style scoped lang="stylus">
   .table-box{
     padding 50px
-    width 1500px
+    width 1300px
     .table-title{
       font-size 20px
       text-align center

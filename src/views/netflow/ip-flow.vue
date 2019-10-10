@@ -8,6 +8,61 @@
         <NetflowPieChart id='dst' title="目的IP流量TOP10" :chart-data="dst"></NetflowPieChart>
       </el-col>
     </el-row>
+    <el-row :gutter="20">
+      <el-col :span="12">
+        <el-table
+          border
+          :data="src.slice((srcPage-1)*5,srcPage*5)">
+          <el-table-column
+            type="index">
+          </el-table-column>
+          <el-table-column
+            prop="name"
+            label="源IP地址">
+          </el-table-column>
+          <el-table-column
+            prop="value"
+            label="发送字节">
+            <template slot-scope="scope">
+              <span style="margin-left: 10px">{{ scope.row.value }}KB</span>
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-pagination
+          layout="prev, pager, next"
+          :page-size="5"
+          :total="10"
+          @current-change="handleSrcChange">
+        </el-pagination>
+      </el-col>
+
+      <el-col :span="12">
+        <el-table
+          border
+          :data="dst.slice((dstPage-1)*5,dstPage*5)">
+          <el-table-column
+            type="index">
+          </el-table-column>
+          <el-table-column
+            prop="name"
+            label="目的IP地址">
+          </el-table-column>
+          <el-table-column
+            prop="value"
+            label="接收字节">
+            <template slot-scope="scope">
+              <span style="margin-left: 10px">{{ scope.row.value }}KB</span>
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-pagination
+          layout="prev, pager, next"
+          :page-size="5"
+          :total="10"
+          @current-change="handleDstChange">
+        </el-pagination>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -21,8 +76,10 @@ export default {
   },
   data() {
     return {
-      src: undefined,
-      dst: undefined,
+      src: [],
+      dst: [],
+      srcPage: 1,
+      dstPage: 1
     }
   },
   mounted() {
@@ -34,6 +91,12 @@ export default {
       const data = await NetflowModel.statFlow()
       this.src = data.src
       this.dst = data.dst
+    },
+    handleSrcChange(page) {
+      this.srcPage = page
+    },
+    handleDstChange(page) {
+      this.dstPage = page
     }
   }
 }
