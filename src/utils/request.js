@@ -24,13 +24,13 @@ _axios.interceptors.request.use(
 
 // request 拦截
 _axios.interceptors.response.use(response => {
-  const { 
-    status, 
-    message, 
+  const {
+    status,
+    message,
     data
   } = response
   handleLoginRes(response, data)
-  
+
   if (status > 200) {
     Notification({
       message: message || '服务端异常',
@@ -109,9 +109,9 @@ export function _delete(url, params = {}) {
 }
 
 function handleLoginRes(res, data) {
-  const { 
-    baseURL, 
-    url: intactURL, 
+  const {
+    baseURL,
+    url: intactURL,
     method,
     headers: {
       token
