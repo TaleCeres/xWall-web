@@ -115,7 +115,8 @@ export default {
     async getData() {
       let { list, ddos } = this
       let data = await ddosModel.getDDOS()
-      let arr = data.data[0].commonAttacksPrevention
+      console.log('getDDOS', data)
+      let arr = data[0].commonAttacksPrevention
       let info = {}
       this.commonAttacksPreventions.forEach(item => {
         console.log(item)
