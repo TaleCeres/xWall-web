@@ -6,8 +6,8 @@ import { getToken } from './cookie'
 
 // 创建请求实例
 const _axios = axios.create({
-  baseURL: 'http://192.168.1.124:3001',
-  // baseURL: 'http://192.168.1.124:8081',
+  // baseURL: 'http://192.168.1.124:3001',
+  baseURL: 'http://192.168.1.124:8081',
   timeout: 5000 // request timeout
 })
 
