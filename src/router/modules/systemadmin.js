@@ -13,7 +13,7 @@ export default {
       path: '/system/ip',
       component: _import('system-admin/ip-config'),
       name: 'ipConfig',
-      meta: { title: '管理IP设置', icon: 'fa fa-cog' },
+      meta: { title: '管理中心IP设置', icon: 'fa fa-cog' },
     },
     {
       path: '/system/reboot',
