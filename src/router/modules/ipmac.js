@@ -3,6 +3,7 @@ const _import = file => () => import(`@/views/${file}.vue`)
 export default {
   path: '/ipmac',
   name: 'IpMac',
+  redirect: '/ipmac/index',
   component: undefined,
   meta: {
     title: '地址绑定',

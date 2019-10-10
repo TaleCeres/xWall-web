@@ -3,6 +3,7 @@ const _import = file => () => import(`@/views/${file}.vue`)
 export default {
   path: '/ipfw',
   name: 'ipfw',
+  redirect: '/ipfw/index',
   component: undefined,
   meta: {
     title: 'IP层规则',
