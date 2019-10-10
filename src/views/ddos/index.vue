@@ -58,25 +58,25 @@
 
     <el-dialog title="编辑" :visible.sync="dialogFormVisible">
       <el-form :model="ddos">
-        <el-form-item label="Land" label-width="100px">
+        <el-form-item label="Land" label-width="200px">
           <el-switch v-model="ddos.land"></el-switch>
         </el-form-item>
-        <el-form-item label="Syn Flood" label-width="100px">
+        <el-form-item label="Syn Flood" label-width="200px">
           <el-switch v-model="ddos.syn"></el-switch>
         </el-form-item>
-        <el-form-item label="UDP Flood" label-width="100px">
+        <el-form-item label="UDP Flood" label-width="200px">
           <el-switch v-model="ddos.udp"></el-switch>
         </el-form-item>
-        <el-form-item label="ICMP Flood" label-width="100px">
+        <el-form-item label="ICMP Flood" label-width="200px">
           <el-switch v-model="ddos.icmp"></el-switch>
         </el-form-item>
-        <el-form-item label="端口扫描" label-width="100px">
+        <el-form-item label="端口扫描" label-width="200px">
           <el-switch v-model="ddos.portscan"></el-switch>
         </el-form-item>
-        <el-form-item label="Ping of Death" label-width="100px">
+        <el-form-item label="Ping of Death" label-width="200px">
           <el-switch v-model="ddos.pingofdeath"></el-switch>
         </el-form-item>
-        <el-form-item label="Teardrop" label-width="100px">
+        <el-form-item label="Teardrop" label-width="200px">
           <el-switch v-model="ddos.teardrop"></el-switch>
         </el-form-item>
       </el-form>
