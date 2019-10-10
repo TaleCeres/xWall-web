@@ -6,10 +6,15 @@ import {
 export default class User {
   // 获取抗DDOS设置信息
   static async getDDOS() {
-    const data = await get('xWall/api/sensor')
-    return data
-    // return {
-    //   'data': [
+    const { data } = await get('xWall/api/sensor')
+    return data.map(item => {
+      const { name, commonAttacksPrevention } = item
+      return {
+        name,
+        commonAttacksPrevention
+      }
+    })
+    //   data: [
     //     {
     //       'name': 'Sensor',
     //       'commonAttacksPrevention': [
@@ -23,7 +28,6 @@ export default class User {
     //       ]
     //     }
     //   ]
-    // }
   }
 
   /**

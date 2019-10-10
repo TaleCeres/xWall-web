@@ -116,7 +116,7 @@ export default {
     async getData() {
       let { list, ddos } = this
       let data = await ddosModel.getDDOS()
-      let param = data.data[0]
+      let param = data[0]
       this.param = param
       let arr = param.commonAttacksPrevention ? param.commonAttacksPrevention : []
       let info = {}

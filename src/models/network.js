@@ -3,13 +3,13 @@ import {
   get,
   put,
 } from '@/utils/request'
-import { saveToken } from '../utils/cookie'
 
 // 「网络设置」页面
 export default class Network {
   // 获取「防火墙管理口」的IP设置(目前只返回一个对象，不是数组)
   static async getSensor() {
-    // const data = await get('api/sensor')
+    const data = await get('xWall/api/sensor')
+    console.log('data', data)
     // return data
     return [{
       'name': 'Sensor',
