@@ -12,8 +12,8 @@
       </el-form-item>
       <el-form-item label="用户权限" prop="authority">
         <el-select v-model="ruleForm.authority" placeholder="请选择用户权限">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
+          <el-option label="普通用户" value="user"></el-option>
+          <el-option label="管理员" value="admin"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -23,7 +23,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
 export default {
   name: 'UserAdd',
   data() {
@@ -87,9 +87,6 @@ export default {
           return false
         }
       })
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields()
     }
   }
 }
@@ -120,15 +117,15 @@ export default {
 .btn-create:hover,
 .btn-create:active,
 .btn-create:focus {
-  background-color #289E00
+  background-color #289E90
   color #ffffff
-  font-size 18px
+  font-size 15px
   margin-left -201px
 }
 .btn-create:active {
-  background-color #289E00
+  background-color #289E90
   color #ffffff
-  font-size 18px
+  font-size 15px
   margin-left -201px
 }
 </style>

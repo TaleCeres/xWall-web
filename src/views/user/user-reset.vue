@@ -109,15 +109,15 @@ export default {
 .btn-edit:hover,
 .btn-edit:active,
 .btn-edit:focus {
-  background-color #289E00
+  background-color #289E90
   color #ffffff
-  font-size 18px
+  font-size 15px
   margin-left -201px
 }
 .btn-edit:active {
-  background-color #289E00
+  background-color #289E90
   color #ffffff
-  font-size 18px
+  font-size 15px
   margin-left -201px
 }
 </style>
