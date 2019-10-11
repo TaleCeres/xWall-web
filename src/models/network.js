@@ -29,11 +29,7 @@ export default class Network {
    * @returns
    */
   static async updateSensor() {
-    const rawCtx = store.state.sensor.ctx
-    const ctx = [
-      { ...rawCtx }
-    ]
-    const data = await post('xWall/api/sensor', ctx)
+    const data = await post('xWall/api/sensor', store.state.sensor.ctx)
     return data
   }
 }
