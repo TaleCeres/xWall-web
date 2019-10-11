@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import {
   Icon,
   Button,
@@ -28,7 +29,8 @@ import {
   Switch,
   DatePicker,
   Pagination,
-  Loading
+  Loading,
+  Notification
 } from 'element-ui'
 import {
   loadPlugins
@@ -64,5 +66,7 @@ loadPlugins([
   DatePicker,
   Pagination,
   Dialog,
-  Loading
+  Loading,
+  Notification
 ])
+Vue.prototype.$notify = Notification

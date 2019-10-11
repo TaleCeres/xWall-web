@@ -1,6 +1,6 @@
 <template>
   <div class='user-container'>
-    <el-form ref="ruleForm" :model="ruleForm" :rules="rules" status-icon label-width="200px" class="user-ruleForm">
+    <el-form v-if="auth==='admin'" ref="ruleForm" :model="ruleForm" :rules="rules" status-icon label-width="200px" class="user-ruleForm">
       <el-form-item label="用户名" prop="name">
         <el-input v-model="ruleForm.name"></el-input>
       </el-form-item>
@@ -12,18 +12,23 @@
       </el-form-item>
       <el-form-item label="用户权限" prop="authority">
         <el-select v-model="ruleForm.authority" placeholder="请选择用户权限">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
+          <el-option label="普通用户" value="user"></el-option>
+          <el-option label="管理员" value="admin"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
         <el-button class="btn-create" @click="submitForm('ruleForm')">创建用户</el-button>
       </el-form-item>
     </el-form>
+    <div v-else>您的权限不够</div>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
+import User from '@/models/user'
+import {
+  mapGetters
+} from 'vuex'
 export default {
   name: 'UserAdd',
   data() {
@@ -74,22 +79,41 @@ export default {
           message: '请选择活动区域',
           trigger: 'change'
         }]
-      }
+      },
     }
+  },
+  computed: {
+    ...mapGetters([
+      'auth'
+    ])
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          // alert('submit!')
           console.log('submit!')
+          console.log(this.ruleForm.name, this.ruleForm.pass, this.ruleForm.authority)
+
+          User.createUser(this.ruleForm.name, this.ruleForm.pass, this.ruleForm.authority)
+            .then(res => {
+              if (res.error) {
+                this.$notify({
+                  title: '失败',
+                  message: res.error,
+                  type: 'error'
+                })
+              } else {
+                this.$notify({
+                  title: '成功',
+                  message: '添加用户成功',
+                  type: 'success'
+                })
+              }
+            })
         } else {
           return false
         }
       })
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields()
     }
   }
 }
@@ -120,15 +144,15 @@ export default {
 .btn-create:hover,
 .btn-create:active,
 .btn-create:focus {
-  background-color #289E00
+  background-color #289E90
   color #ffffff
-  font-size 18px
+  font-size 15px
   margin-left -201px
 }
 .btn-create:active {
-  background-color #289E00
+  background-color #289E90
   color #ffffff
-  font-size 18px
+  font-size 15px
   margin-left -201px
 }
 </style>

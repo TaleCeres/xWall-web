@@ -17,7 +17,9 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
+import User from '@/models/user'
+import { mapGetters } from 'vuex'
 export default {
   name: 'UserReset',
   data() {
@@ -42,7 +44,7 @@ export default {
     }
     return {
       ruleForm: {
-        name: '',
+        name: this.username,
         pass: '',
         checkPass: ''
       },
@@ -65,8 +67,14 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters([
+      'username'
+    ])
+  },
   mounted() {
     // this.ruleForm.name = this.$store.state.user.username
+    this.ruleForm.name = this.username
   },
   methods: {
     submitForm(formName) {
@@ -74,6 +82,22 @@ export default {
         if (valid) {
           // alert('submit!')
           console.log('submit')
+          User.updateUser(this.ruleForm.name, this.ruleForm.pass).then(res => {
+            console.log(res)
+            if (res.error) {
+              this.$notify({
+                title: '失败',
+                message: res.error,
+                type: 'error'
+              })
+            } else {
+              this.$notify({
+                title: '成功',
+                message: '添加用户成功',
+                type: 'success'
+              })
+            }
+          })
         } else {
           console.log('error submit!!')
           return false
@@ -109,15 +133,15 @@ export default {
 .btn-edit:hover,
 .btn-edit:active,
 .btn-edit:focus {
-  background-color #289E00
+  background-color #289E90
   color #ffffff
-  font-size 18px
+  font-size 15px
   margin-left -201px
 }
 .btn-edit:active {
-  background-color #289E00
+  background-color #289E90
   color #ffffff
-  font-size 18px
+  font-size 15px
   margin-left -201px
 }
 </style>
