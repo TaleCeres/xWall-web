@@ -4,8 +4,8 @@
 import { removeToken } from '@/utils/cookie'
 
 const state = {
-  logined: false, // 是否登录
-  username: null, // 当前用户
+  logined: true, // 是否登录
+  username: 'test', // 当前用户
   auth: 'admin', // 普通用户和管理员(admin)
 }
 

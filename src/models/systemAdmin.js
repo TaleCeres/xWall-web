@@ -12,7 +12,7 @@ export default class SystemAdmin {
     })
     // return data
     return {
-      "data": "success"
+      'data': 'success'
     }
   }
 
@@ -22,7 +22,7 @@ export default class SystemAdmin {
     const data = await post('xWall/api/sensor/reboot')
     // return data
     return {
-      "data": "success"
+      'data': 'success'
     }
   }
 }
