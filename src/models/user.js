@@ -38,7 +38,7 @@ export default class User {
 
   // 创建用户
   static async createUser(username, password, role) {
-    const data = await post('configCentre/api/user', {
+    const data = await post('/api/user', {
       username, password, role
     })
     return data
