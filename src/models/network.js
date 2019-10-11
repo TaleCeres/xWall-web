@@ -3,6 +3,9 @@ import {
   get,
   put,
 } from '@/utils/request'
+import store from '@/store'
+
+const _ = require('lodash')
 
 // 「网络设置」页面
 export default class Network {
@@ -21,28 +24,16 @@ export default class Network {
   }
 
   /**
-   * 修改「防火墙管理口」的IP设置
-   *
+   * 更新防火墙配置
    * @static
-   * @param {*} sensor
-            {
-              "name": "Sensor",
-              "ip": "192.168.1.149",
-              "netmask": "255.255.255.0",
-              "mac": "40:8d:5c:aa:b5:60",
-              "serialNumber": "AA000000000400019073",
-            }
    * @returns
    */
-  static async updateSensor(sensor) {
-    // const data = await post('api/sensor', sensor)
-    // return data
-    return {
-      'name': 'NewSensor',
-      'ip': '192.168.1.149',
-      'netmask': '255.255.255.0',
-      'mac': '40:8d:5c:aa:b5:60',
-      'serialNumber': 'AA000000000400019073',
-    }
+  static async updateSensor() {
+    const rawCtx = store.state.sensor.ctx
+    const ctx = [
+      { ...rawCtx }
+    ]
+    const data = await post('xWall/api/sensor', ctx)
+    return data
   }
 }

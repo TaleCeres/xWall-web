@@ -118,6 +118,10 @@ function handleLoginRes(res, data) {
     }
   } = res.config
   if (intactURL.split(baseURL)[1] === '/login' && method === 'post') data.token = token
+  if (intactURL.split(baseURL)[1] === '/xWall/api/sensor' && method === 'get') {
+    const ctx = data.data[0]
+    store.commit('sensor/INIT_CTX', ctx)
+  }
 }
 
 export default _axios

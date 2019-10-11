@@ -7,6 +7,7 @@ import mutations from './mutations'
 import actions from './actions'
 import app from './modules/app'
 import user from './modules/user'
+import sensor from './modules/sensor'
 import router from './modules/router'
 import visual from './modules/visual'
 
@@ -20,6 +21,7 @@ export default new Vuex.Store({
   modules: {
     app,
     user,
+    sensor,
     router,
     visual,
   },
