@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from 'vue'
 import {
   Icon,
   Button,
@@ -67,4 +67,4 @@ loadPlugins([
   Dialog,
   Notification
 ])
-Vue.prototype.$notify = Notification;
+Vue.prototype.$notify = Notification

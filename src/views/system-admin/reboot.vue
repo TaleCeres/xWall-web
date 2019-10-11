@@ -8,63 +8,59 @@
 </template>
 
 <script>
-  import SystemAdmin from '@/models/systemAdmin'
+import SystemAdmin from '@/models/systemAdmin'
 
-  export default {
-    name: 'Reboot',
-    data() {
-      return {
-      }
-    },
-    methods: {
-      handleReboot() {
-        SystemAdmin.setIpOfCenter().then((res) => {
-          // console.log('res', res)
-          if (res.data === 'success') {
-            this.$notify({
-              title: '成功',
-              message: '重启成功',
-              type: 'success'
-            });
-          }
-        })
-      }
+export default {
+  name: 'Reboot',
+  data() {
+    return {
+    }
+  },
+  methods: {
+    handleReboot() {
+      SystemAdmin.setIpOfCenter().then(res => {
+        // console.log('res', res)
+        if (res.data === 'success') {
+          this.$notify({
+            title: '成功',
+            message: '重启成功',
+            type: 'success'
+          })
+        }
+      })
     }
   }
+}
 </script>
 
 <style lang="stylus">
-  .user-container {
-    margin 30px
-  }
-
-  .btn-reboot {
-    background-color #289E90;
-    color #ffffff;
-    font-size 15px;
-  }
-
-  .btn-reboot:hover,
-  .btn-reboot:active,
-  .btn-reboot:focus {
-    background-color #289E90;
-    color #ffffff;
-    font-size 15px;
-  }
-
-  .btn-reboot:active {
-    background-color #289E90;
-    color #ffffff;
-    font-size 15px;
-  }
-
-  .text-child {
-    width: 100%;
-    height: 32px;
-    background-color: #f4f4f5;
-    align-content: center;
-    padding: 18px 9px 0px 21px;
-    border-left: 5px solid #2274bb;
-    margin: 10px 0;
-  }
+.user-container {
+  margin 30px
+}
+.btn-reboot {
+  background-color #289E90
+  color #ffffff
+  font-size 15px
+}
+.btn-reboot:hover,
+.btn-reboot:active,
+.btn-reboot:focus {
+  background-color #289E90
+  color #ffffff
+  font-size 15px
+}
+.btn-reboot:active {
+  background-color #289E90
+  color #ffffff
+  font-size 15px
+}
+.text-child {
+  width 100%
+  height 32px
+  background-color #f4f4f5
+  align-content center
+  padding 18px 9px 0px 21px
+  border-left 5px solid #2274bb
+  margin 10px 0
+}
 </style>
