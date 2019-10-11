@@ -3,8 +3,24 @@
 </template>
 
 <script>
+import srcIpModel from '@/models/srcIp'
 export default {
-  name: 'index'
+  name: 'index',
+  data() {
+    return {
+      externalNodes: []
+    }
+  },
+  mounted() {
+    this.getData()
+  },
+  methods: {
+    async getData() {
+      let { externalNodes } = this
+      let data = await srcIpModel.getExternalNodes()
+      console.log(data)
+    },
+  }
 }
 </script>
 
