@@ -38,11 +38,12 @@ export default {
   watch: {
     $route(prev, next) {
       const { tags } = this
+      console.log('route变化')
       this.addTag()
     },
   },
   created() {},
-  mounted() {},
+  mounted() { this.addTag() },
   methods: {
     handleScroll(e) {
       const eventDelta = e.wheelDelta || -e.deltaY * 40

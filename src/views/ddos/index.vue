@@ -23,15 +23,15 @@
         <el-table-column prop="teardrop" label="Teardrop" width="150">
         </el-table-column>
         <el-table-column label="操作">
-          <template slot-scope="scope">
-            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑
+          <template>
+            <el-button size="mini" @click="dialogFormVisible = true">编辑
             </el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
 
-    <el-dialog title="编辑" :visible.sync="dialogFormVisible" v-loading="loading">
+    <el-dialog v-loading="loading" title="编辑" :visible.sync="dialogFormVisible">
       <el-form :model="ddos">
         <el-form-item label="Land" label-width="200px">
           <el-switch v-model="ddos.land"></el-switch>
@@ -65,7 +65,8 @@
 
 <script>
 import ddosModel from '@/models/ddos'
-import NetworkModel from '@/models/network'
+import SensorModel from '@/models/sensor'
+import { mapState } from 'vuex'
 export default {
   name: 'ddos',
   data() {
@@ -73,7 +74,6 @@ export default {
       list: [],
       dialogFormVisible: false,
       commonAttacksPreventions: ['land', 'syn', 'udp', 'icmp', 'portscan', 'pingofdeath', 'teardrop'],
-      param: {},
       ddos: {
         land: false,
         syn: false,
@@ -83,19 +83,31 @@ export default {
         pingofdeath: false,
         teardrop: false
       },
-      loading:false,
+      loading: false,
     }
   },
-  mounted() {
-    this.getData()
+  computed: {
+    ...mapState({
+      ctx: state => state.sensor.ctx,
+    }),
+    commonAttacksPrevention() {
+      if (this.ctx && this.ctx.commonAttacksPrevention) {
+        return this.ctx.commonAttacksPrevention
+      }
+      return []
+    }
   },
+  watch: {
+    commonAttacksPrevention() {
+      this.getData()
+    }
+  },
+  mounted() {},
   methods: {
     async getData() {
+      this.list = []
       let { list, ddos } = this
-      let data = await ddosModel.getDDOS()
-      let param = data[0]
-      this.param = param
-      let arr = param.commonAttacksPrevention ? param.commonAttacksPrevention : []
+      let arr = this.commonAttacksPrevention
       let info = {}
       this.commonAttacksPreventions.forEach(item => {
         if (arr.includes(item)) {
@@ -110,12 +122,9 @@ export default {
       this.list = list
       this.ddos = ddos
     },
-    async handleEdit(index, row) {
-      this.dialogFormVisible = true
-    },
     async handleUpdate() {
       // 处理数据
-      let { ddos, param, commonAttacksPreventions } = this
+      let { ddos, commonAttacksPreventions } = this
       let arr = []
       commonAttacksPreventions.forEach(item => {
         if (ddos[item] === true) { arr.push(item) }
@@ -123,9 +132,7 @@ export default {
       // 1. 更改「抗DDOS」配置（会在vuex中修改整个sensor）; 2. 更新整个sensor
       this.$store.commit('sensor/SET_DDOS', arr)
       this.loading = true
-      NetworkModel.updateSensor().then(res => {
-        this.list = []
-        this.getData()
+      SensorModel.updateSensor().then(res => {
         this.loading = false
         this.dialogFormVisible = false
       })
