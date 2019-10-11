@@ -27,7 +27,8 @@ import {
   Dialog,
   Switch,
   DatePicker,
-  Pagination
+  Pagination,
+  Loading
 } from 'element-ui'
 import {
   loadPlugins
@@ -62,5 +63,6 @@ loadPlugins([
   Switch,
   DatePicker,
   Pagination,
-  Dialog
+  Dialog,
+  Loading
 ])

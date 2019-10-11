@@ -31,7 +31,7 @@
       </el-table>
     </div>
 
-    <el-dialog title="编辑" :visible.sync="dialogFormVisible">
+    <el-dialog title="编辑" :visible.sync="dialogFormVisible" v-loading="loading">
       <el-form :model="ddos">
         <el-form-item label="Land" label-width="200px">
           <el-switch v-model="ddos.land"></el-switch>
@@ -82,7 +82,8 @@ export default {
         portscan: false,
         pingofdeath: false,
         teardrop: false
-      }
+      },
+      loading:false,
     }
   },
   mounted() {
@@ -121,8 +122,13 @@ export default {
       })
       // 1. 更改「抗DDOS」配置（会在vuex中修改整个sensor）; 2. 更新整个sensor
       this.$store.commit('sensor/SET_DDOS', arr)
-      NetworkModel.updateSensor()
-      this.dialogFormVisible = false
+      this.loading = true
+      NetworkModel.updateSensor().then(res => {
+        this.list = []
+        this.getData()
+        this.loading = false
+        this.dialogFormVisible = false
+      })
     }
   }
 }
