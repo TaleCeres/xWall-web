@@ -21,7 +21,7 @@
 
 <script>
   import User from '@/models/user'
-
+  import {mapGetters} from 'vuex'
   export default {
     name: 'UserReset',
     data() {
@@ -46,7 +46,7 @@
       }
       return {
         ruleForm: {
-          name: '',
+          name: this.username,
           pass: '',
           checkPass: ''
         },
@@ -71,6 +71,12 @@
     },
     mounted() {
       // this.ruleForm.name = this.$store.state.user.username
+      this.ruleForm.name=this.username
+    },
+    computed: {
+      ...mapGetters([
+        'username'
+      ])
     },
     methods: {
       submitForm(formName) {
@@ -78,7 +84,7 @@
           if (valid) {
             // alert('submit!')
             console.log('submit')
-            User.updateUser(formName.username, formName.password).then(res => {
+            User.updateUser(this.ruleForm.name, this.ruleForm.pass).then(res => {
               console.log(res)
               if (res.error) {
                 this.$notify({
@@ -89,7 +95,7 @@
               } else {
                 this.$notify({
                   title: '成功',
-                  message: '删除用户成功',
+                  message: '添加用户成功',
                   type: 'success'
                 })
               }

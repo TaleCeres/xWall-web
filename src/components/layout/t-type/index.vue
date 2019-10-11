@@ -54,8 +54,8 @@ export default {
     },
   },
   async created() {
-    const user = await UserModel.getToken('support@gushenxing.com', 'gushenxing123')
-    this.$store.dispatch('user/setUser', user)
+    // const user = await UserModel.getToken('support@gushenxing.com', 'gushenxing123')
+    // this.$store.dispatch('user/setUser', user)
   },
   methods: {
     toggleSlidebarState() {

@@ -1,6 +1,6 @@
 <template>
   <div class='user-container'>
-    <el-form ref="ruleForm" :model="ruleForm" :rules="rules" status-icon label-width="200px"
+    <el-form v-if="auth==='admin'" ref="ruleForm" :model="ruleForm" :rules="rules" status-icon label-width="200px"
       class="user-ruleForm">
       <el-form-item label="用户名" prop="name">
         <el-input v-model="ruleForm.name"></el-input>
@@ -22,11 +22,15 @@
         <el-button class="btn-create" @click="submitForm('ruleForm')">创建用户</el-button>
       </el-form-item>
     </el-form>
+    <div v-else>您的权限不够</div>
   </div>
 </template>
 
 <script>
   import User from '@/models/user'
+  import {
+    mapGetters
+  } from 'vuex'
   export default {
     name: 'UserAdd',
     data() {
@@ -77,16 +81,25 @@
             message: '请选择活动区域',
             trigger: 'change'
           }]
-        }
+        },
       }
+    },
+    computed: {
+      ...mapGetters([
+      'auth'
+    ])
     },
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate(valid => {
           if (valid) {
             console.log('submit!')
+            console.log(this.ruleForm.name, this.ruleForm.pass, this.ruleForm.authority)
+
             User.createUser(this.ruleForm.name, this.ruleForm.pass, this.ruleForm.authority)
               .then((res) => {
+                console.log('res', res)
+
                 if (res.error) {
                   this.$notify({
                     title: '失败',
