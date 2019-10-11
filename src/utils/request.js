@@ -27,11 +27,13 @@ _axios.interceptors.response.use(response => {
   const {
     status,
     message,
-    data
+    data,
+    error
   } = response
   handleLoginRes(response, data)
 
   if (status > 200) {
+    if (error) message = error
     Notification({
       message: message || '服务端异常',
       type: 'warning',
