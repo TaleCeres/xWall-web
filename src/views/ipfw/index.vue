@@ -6,10 +6,10 @@
         <el-table-column label="名称" prop="name" />
         <el-table-column label="源地址" prop="srcIP" />
         <el-table-column label="目的地址" prop="dstIP" />
-        <el-table-column label="工控协议" prop="land" />
+        <el-table-column label="工控协议" prop="types" />
         <el-table-column align="center">
-          <template slot="header" slot-scope="scope">
-            <el-button size="mini" type="success" @click="handleEdit(scope.$index, scope.row)">新增 +
+          <template slot="header">
+            <el-button size="mini" type="success" @click="handleAdd">新增 +
             </el-button>
           </template>
           <template slot-scope="scope">
@@ -19,34 +19,61 @@
         </el-table-column>
       </el-table>
     </div>
+    <el-dialog title="编辑IP规则" :visible.sync="dialogVisible" width="90%">
+      <IpfWSetting />
+    </el-dialog>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import IpfwSetting from './IpfwSetting'
 export default {
   name: 'IpfwIndex',
+  components: {
+    IpfwSetting
+  },
   data() {
     return {
-      list: []
+      dialogVisible: false
     }
   },
-  async created() {
-    const { protectedNodes } = this.$store.state.sensor.ctx
-    console.log('protectedNodes', protectedNodes)
-    this.list = [...protectedNodes].map(item => {
-      let {
-        name, 
-        whitelist: {
-          accessList
-        }, 
-        ip: dstIP
-      } = item
-      return {
-        name,
-        srcIP: accessList.map(el => el.ip).join(','),
-        dstIP
-      }
-    })
+  computed: {
+    ...mapState({
+      sensor: state => state.sensor.ctx
+    }),
+    protectedNodes() {
+      if (this.sensor && this.sensor.protectedNodes) return this.sensor.protectedNodes
+      return []
+    },
+    list() {
+      return this.protectedNodes.map(item => {
+        let {
+          name,
+          whitelist: {
+            accessList
+          },
+          ip: dstIP,
+          types
+        } = item
+
+        return {
+          name,
+          srcIP: accessList.map(el => el.ip).join(', '),
+          dstIP,
+          types: types.join(', ')
+        }
+      })
+    }
+  },
+  methods: {
+    handleAdd() {
+
+    },
+    handleEdit(index, row) {
+      this.dialogVisible = true
+      console.log(index, row)
+    }
   }
 }
 </script>
