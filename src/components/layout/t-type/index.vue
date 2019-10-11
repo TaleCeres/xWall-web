@@ -21,6 +21,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import SensorModel from '@/models/sensor'
 import { mapGetters } from 'vuex'
 import UserModel from '@/models/user'
 import HistoryTag from 'comps/base/HistoryTag'
@@ -54,6 +55,7 @@ export default {
     },
   },
   async created() {
+    await SensorModel.getSensor()
     // const user = await UserModel.getToken('support@gushenxing.com', 'gushenxing123')
     // this.$store.dispatch('user/setUser', user)
   },
