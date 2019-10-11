@@ -30,7 +30,7 @@ _axios.interceptors.response.use(response => {
     data,
     error
   } = response
-  handleLoginRes(response, data)
+  handleRes(response, data)
 
   if (status > 200) {
     if (error) message = error
@@ -110,7 +110,7 @@ export function _delete(url, params = {}) {
   })
 }
 
-function handleLoginRes(res, data) {
+function handleRes(res, data) {
   const {
     baseURL,
     url: intactURL,
@@ -122,6 +122,10 @@ function handleLoginRes(res, data) {
   if (intactURL.split(baseURL)[1] === '/login' && method === 'post') data.token = token
   if (intactURL.split(baseURL)[1] === '/xWall/api/sensor' && method === 'get') {
     const ctx = data.data[0]
+    store.commit('sensor/INIT_CTX', ctx)
+  }
+  if (intactURL.split(baseURL)[1] === '/xWall/api/sensor' && method === 'post') {
+    const ctx = data.data
     store.commit('sensor/INIT_CTX', ctx)
   }
 }
