@@ -3,13 +3,9 @@
     <div class="title">DDOS</div>
     <div class="table-box">
       <el-table border size="medium" header-row-class-nam="table-title" cell-class-name='table-cell' :data="list" style="width: 100%">
-        <el-table-column label="名称">
-          <template>
-            eth0,brg0
-          </template>
-        </el-table-column>
-        <el-table-column label="源地址" prop="land" />
-        <el-table-column label="目的地址" prop="land" />
+        <el-table-column label="名称" prop="name" />
+        <el-table-column label="源地址" prop="srcIP" />
+        <el-table-column label="目的地址" prop="dstIP" />
         <el-table-column label="工控协议" prop="land" />
         <el-table-column align="center">
           <template slot="header" slot-scope="scope">
@@ -27,7 +23,6 @@
 </template>
 
 <script>
-import SensorModel from '@/models/sensor'
 export default {
   name: 'IpfwIndex',
   data() {
@@ -36,7 +31,6 @@ export default {
     }
   },
   async created() {
-    await SensorModel.getSensor()
     const { protectedNodes } = this.$store.state.sensor.ctx
     console.log('protectedNodes', protectedNodes)
     this.list = [...protectedNodes].map(item => {
