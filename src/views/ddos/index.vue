@@ -119,9 +119,8 @@ export default {
       commonAttacksPreventions.forEach(item => {
         if (ddos[item] === true) { arr.push(item) }
       })
-      param.commonAttacksPrevention = arr
       // 1. 更改「抗DDOS」配置（会在vuex中修改整个sensor）; 2. 更新整个sensor
-      this.$store.commit('sensor/SET_DDOS', commonAttacksPreventions)
+      this.$store.commit('sensor/SET_DDOS', arr)
       NetworkModel.updateSensor()
       this.dialogFormVisible = false
     }
