@@ -2,11 +2,7 @@
   <div class="network">
     <div class="title">DDOS</div>
     <div class="table-box">
-      <el-table border size="medium"
-                header-row-class-nam="table-title"
-                cell-class-name ='table-cell'
-                :data="list"
-                style="width: 100%">
+      <el-table border size="medium" header-row-class-nam="table-title" cell-class-name='table-cell' :data="list" style="width: 100%">
         <el-table-column label="网口">
           <template>
             eth0,brg0
@@ -14,47 +10,26 @@
         </el-table-column>
         <el-table-column label="Land" prop="land">
         </el-table-column>
-        <el-table-column
-          prop="syn"
-          label="Syn Flood"
-          width="150">
+        <el-table-column prop="syn" label="Syn Flood" width="150">
         </el-table-column>
-        <el-table-column
-          prop="udp"
-          label="UDP Flood"
-          width="150">
+        <el-table-column prop="udp" label="UDP Flood" width="150">
         </el-table-column>
-        <el-table-column
-          prop="icmp"
-          label="ICMP Flood"
-          width="150">
+        <el-table-column prop="icmp" label="ICMP Flood" width="150">
         </el-table-column>
-        <el-table-column
-          prop="portscan"
-          label="端口扫描"
-          width="150">
+        <el-table-column prop="portscan" label="端口扫描" width="150">
         </el-table-column>
-        <el-table-column
-          prop="pingofdeath"
-          label="Ping of Death"
-          width="150">
+        <el-table-column prop="pingofdeath" label="Ping of Death" width="150">
         </el-table-column>
-        <el-table-column
-          prop="teardrop"
-          label="Teardrop"
-          width="150">
+        <el-table-column prop="teardrop" label="Teardrop" width="150">
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button
-              size="mini"
-              @click="handleEdit(scope.$index, scope.row)">编辑
+            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑
             </el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
-
 
     <el-dialog title="编辑" :visible.sync="dialogFormVisible">
       <el-form :model="ddos">
@@ -90,6 +65,7 @@
 
 <script>
 import ddosModel from '@/models/ddos'
+import NetworkModel from '@/models/network'
 export default {
   name: 'ddos',
   data() {
@@ -116,18 +92,17 @@ export default {
     async getData() {
       let { list, ddos } = this
       let data = await ddosModel.getDDOS()
-      let param = data.data[0]
+      let param = data[0]
       this.param = param
       let arr = param.commonAttacksPrevention ? param.commonAttacksPrevention : []
       let info = {}
       this.commonAttacksPreventions.forEach(item => {
-        console.log(item)
         if (arr.includes(item)) {
-          ddos[`${item}`] = true
-          info[`${item}`] = '开启'
+          ddos[item] = true
+          info[item] = '开启'
         } else {
-          ddos[`${item}`] = false
-          info[`${item}`] = '关闭'
+          ddos[item] = false
+          info[item] = '关闭'
         }
       })
       list.push(info)
@@ -145,7 +120,9 @@ export default {
         if (ddos[item] === true) { arr.push(item) }
       })
       param.commonAttacksPrevention = arr
-      let data = await ddosModel.setDDOS(param)
+      // 1. 更改「抗DDOS」配置（会在vuex中修改整个sensor）; 2. 更新整个sensor
+      this.$store.commit('sensor/SET_DDOS', commonAttacksPreventions)
+      NetworkModel.updateSensor()
       this.dialogFormVisible = false
     }
   }
@@ -153,19 +130,17 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .table-box{
-    padding 50px
-    width 1300px
-    .table-title{
-      font-size 20px
-      text-align center
-      font-weight bold
-      background #f4f4f7
-    }
-    .table-cell{
-      font-size 18px
-    }
+.table-box {
+  padding 50px
+  width 1300px
+  .table-title {
+    font-size 20px
+    text-align center
+    font-weight bold
+    background #f4f4f7
   }
-
-
+  .table-cell {
+    font-size 18px
+  }
+}
 </style>
