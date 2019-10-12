@@ -38,7 +38,6 @@ export default {
   watch: {
     $route(prev, next) {
       const { tags } = this
-      console.log('route变化')
       this.addTag()
     },
   },
@@ -80,7 +79,6 @@ export default {
       }
     },
     checkoutTag() {
-      console.log('click')
     }
   },
 }
