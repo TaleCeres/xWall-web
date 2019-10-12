@@ -102,7 +102,9 @@ export default {
       this.getData()
     }
   },
-  mounted() {},
+  mounted() {
+    this.getData()
+  },
   methods: {
     async getData() {
       this.list = []
