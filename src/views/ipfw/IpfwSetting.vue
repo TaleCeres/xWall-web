@@ -2,7 +2,7 @@
   <div class="ipfw-setting">
     <el-form ref="form" :model="form" status-icon label-width="180px" class="form">
       <el-form-item label="名称描述">
-        <el-input v-model="form.name" class="item" />
+        <el-input v-model="form.name" class="item"  style="width: 570px"/>
       </el-form-item>
       <el-form :inline="true" label-width="180px">
         <el-form-item label="制造商">
@@ -28,12 +28,12 @@
       </el-form-item>
       <el-form-item label="支持协议">
         <el-checkbox-group v-model="form.types" class="item">
-          <el-checkbox label="MODBUS" name="types"></el-checkbox>
-          <el-checkbox label="DNP3" name="types"></el-checkbox>
-          <el-checkbox label="OPC" name="types"></el-checkbox>
-          <el-checkbox label="IEC104" name="types"></el-checkbox>
-          <el-checkbox label="CIP" name="types"></el-checkbox>
-          <el-checkbox label="PROFINET" name="types"></el-checkbox>
+          <el-checkbox label="modbus" name="types"></el-checkbox>
+          <el-checkbox label="dnp3" name="types"></el-checkbox>
+          <el-checkbox label="opc" name="types"></el-checkbox>
+          <el-checkbox label="iec104" name="types"></el-checkbox>
+          <el-checkbox label="cip" name="types"></el-checkbox>
+          <el-checkbox label="profinet" name="types"></el-checkbox>
         </el-checkbox-group>
       </el-form-item>
     </el-form>
@@ -44,22 +44,22 @@
       <el-tab-pane v-if="whitelist.enabled" label="目标IP端口" name="desIpPort">
         <DstIpPortSetting />
       </el-tab-pane>
-      <el-tab-pane v-if="canSetting('MODBUS')" key="tab-modbus" label="MODBUS" name="modbus">
+      <el-tab-pane v-if="canSetting('modbus')" key="tab-modbus" label="modbus" name="modbus">
         <ModbusProtoColSetting />
       </el-tab-pane>
-      <el-tab-pane v-if="canSetting('DNP3')" key="tab-dnp3" label="DNP3" name="dnp3">
+      <el-tab-pane v-if="canSetting('dnp3')" key="tab-dnp3" label="dnp3" name="dnp3">
         <Dnp3ProtoColSetting />
       </el-tab-pane>
-      <el-tab-pane v-if="canSetting('OPC')" key="tab-opc" label="OPC" name="opc">
+      <el-tab-pane v-if="canSetting('opc')" key="tab-opc" label="opc" name="opc">
         <OpcProtocolSetting />
       </el-tab-pane>
-      <el-tab-pane v-if="canSetting('IEC104')" key="tab-iec104" label="IEC104" name="iec104">
+      <el-tab-pane v-if="canSetting('iec104')" key="tab-iec104" label="iec104" name="iec104">
         <Iec104ProtoColSetting />
       </el-tab-pane>
-      <el-tab-pane v-if="canSetting('CIP')" key="tab-cip" label="CIP" name="cip">
+      <el-tab-pane v-if="canSetting('cip')" key="tab-cip" label="cip" name="cip">
         <CipProtoColSetting />
       </el-tab-pane>
-      <el-tab-pane v-if="canSetting('PROFINET')" key="tab-profinet" label="PROFINET" name="profinet">
+      <el-tab-pane v-if="canSetting('profinet')" key="tab-profinet" label="profinet" name="profinet">
         <ProfinetProtocolSetting />
       </el-tab-pane>
     </el-tabs>
@@ -96,15 +96,12 @@ export default {
         ip: '',
         netmask: '',
         types: [],
-        blacklist: {
-          autoDeploy: true
-        },
       },
       blacklist: {
         autoDeploy: true,
       },
       whitelist: {
-        enabled: false
+        enabled: true
       },
       activeName: 'cip'
     }

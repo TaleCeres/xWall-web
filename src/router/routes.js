@@ -81,6 +81,7 @@ const routes = [
   // 以下非「业务页面」
   { path: '/login', component: _import('login/index'), hidden: true },
   { path: '/404', component: _import('error-page/404'), hidden: true },
+  { path: '/redirect', component: _import('error-page/redirect'), hidden: true },
   { path: '*', redirect: '/404', hidden: true },
 ]
 

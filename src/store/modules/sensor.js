@@ -39,6 +39,7 @@ const state = {
     blacklist: {
       autoDeploy: true
     },
+    whitelist: []
   },
   dDosdialogVisible: false
 }
@@ -56,7 +57,6 @@ const mutations = {
     state.ctx.commonAttacksPrevention = commonAttacksPrevention
   },
   SET_DDOS_DIALOG_VISIBLE(state, bool) {
-    console.log('state.tmpWhitelist', state.tmpWhitelist)
     state.dDosdialogVisible = bool
   },
   // 初始化IP配置
@@ -95,8 +95,9 @@ const mutations = {
   SET_IP_RULE(state, index) {
     if (state.ctx && state.ctx.protectedNodes.length > 0 && state.ctx.protectedNodes[index].whitelist) {
       state.ctx.protectedNodes[index].whitelist = state.tmpWhitelist
+      state.ctx.tmpProtectedNode = state.ctx.protectedNodes[index]
     }
-  }
+  },
 }
 
 const actions = {

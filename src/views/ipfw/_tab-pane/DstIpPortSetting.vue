@@ -1,6 +1,5 @@
 <template>
   <div class="dst-ip">
-    {{ ports }}
     <div class="ip-item">
       <p>tcp</p>
       <el-radio-group v-model="ports.tcp.option" class="radio">

@@ -2,7 +2,7 @@
 
 export function transfromValue2fc(valueList, fcList) {
   let resultList = []
-  if (valueList) {
+  if (valueList instanceof Array) {
     valueList.forEach(value => {
       let target = fcList.find(el => el.value === value)
       if (target) resultList.push(target)
@@ -13,7 +13,7 @@ export function transfromValue2fc(valueList, fcList) {
 
 export function transfromValue2Name(valueList, fcList) {
   let resultList = []
-  if (valueList) {
+  if (valueList instanceof Array) {
     valueList.forEach(value => {
       let target = fcList.find(el => el.value === value)
       if (target) resultList.push(target.name)
@@ -24,7 +24,7 @@ export function transfromValue2Name(valueList, fcList) {
 
 export function transfromName2Value(nameList, fcList) {
   let resultList = []
-  if (nameList) {
+  if (nameList instanceof Array) {
     nameList.forEach(item => {
       const target = fcList.find(el => el.name === item)
       if (target) resultList.push(target.value)
