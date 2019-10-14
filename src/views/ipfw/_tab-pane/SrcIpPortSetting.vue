@@ -1,6 +1,8 @@
 <template>
-  <div>
-    源IP端口
+  <div class="src-ip">
+    <div v-for="item in accessList" :key="item.ip" class="ip-item">
+      {{ item }}
+    </div>
   </div>
 </template>
 
@@ -9,12 +11,25 @@ export default {
   name: 'SrcIpPortSetting',
   components: {},
   data() {
-    return {}
+    return {
+      accessList: []
+    }
   },
   computed: {},
-  created() {},
-  mounted() {},
-  methods: {},
+  watch: {
+    dialogVisible(val, oldVal) {
+      if (val) this.initCheckState()
+    }
+  },
+  created() { },
+  mounted() {
+    this.initCheckState()
+  },
+  methods: {
+    initCheckState() {
+      this.accessList = this.$store.state.sensor.tmpWhitelist.accessList
+    }
+  },
 }
 </script>
 
