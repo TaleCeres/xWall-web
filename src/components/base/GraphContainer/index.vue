@@ -35,7 +35,7 @@ export default {
   background-color #fff
   background-size 100% 100%
   overflow hidden
-  height 240px
+  height 350px
   box-shadow 0 2px 12px 0 rgba(0,0,0,.1)
   .title {
     padding-left 20px
