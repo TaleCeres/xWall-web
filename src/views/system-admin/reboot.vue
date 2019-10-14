@@ -19,7 +19,6 @@ export default {
   methods: {
     handleReboot() {
       SystemAdmin.setIpOfCenter().then(res => {
-        // console.log('res', res)
         if (res.data === 'success') {
           this.$notify({
             title: '成功',

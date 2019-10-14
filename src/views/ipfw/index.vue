@@ -19,15 +19,19 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog title="编辑IP规则" :visible.sync="dialogVisible" width="90%">
-      <IpfWSetting />
+    <el-dialog title="编辑IP规则" :visible.sync="dialogVisible" width="800px">
+      <IpfwSetting />
+      <span slot="footer" class="dialog-footer">
+        <el-button size="mini" @click="handleCancelEdit">取 消</el-button>
+        <el-button size="mini" type="primary" @click="handleSaveEdit">保存</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import IpfwSetting from './IpfwSetting'
+import IpfwSetting from './ipfwSetting'
 export default {
   name: 'IpfwIndex',
   components: {
@@ -35,7 +39,8 @@ export default {
   },
   data() {
     return {
-      dialogVisible: false
+      dialogVisible: false,
+      index: 0
     }
   },
   computed: {
@@ -66,13 +71,30 @@ export default {
       })
     }
   },
+  watch: {
+    dialogVisible(val, oldVal) {
+      this.$store.commit('sensor/SET_DDOS_DIALOG_VISIBLE', val)
+    },
+    index(val, oldVal) {
+      this.$store.commit('sensor/INIT_TMP_WHITE_LIST', val) 
+    }
+  },
   methods: {
     handleAdd() {
 
     },
     handleEdit(index, row) {
       this.dialogVisible = true
-      console.log(index, row)
+      this.index = index
+      // console.log('data', this.$store.state.sensor.tmpWhitelist)
+      // 弹出框取消，则再执行 sensor/INIT_TMP_WHITE_LIST
+    },
+    handleCancelEdit() {
+      this.dialogVisible = false
+    },
+    handleSaveEdit() {
+      this.$store.commit('sensor/SET_IP_RULE', this.index)
+      this.dialogVisible = false
     }
   }
 }

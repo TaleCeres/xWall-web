@@ -57,7 +57,6 @@ export default {
     deleteRow(index, rows) {
       // console.log(rows[index].username)
       User.deleteUser(rows[index].username).then(res => {
-        console.log(res)
         if (res.error) {
           this.$notify({
             title: '失败',

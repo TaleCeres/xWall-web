@@ -31,26 +31,4 @@ export default class User {
       }
     })
   }
-
-  /**
-   * 修改「抗DDOS规则」配置
-   * @static
-   * @param {*} ctx
-   * {
-      // 其他参数无需修改, 一并传回
-      "commonAttacksPrevention": [
-      "land",  // Land 攻击防护, 开启则写入数组
-      "syn",  // Syn Flood 攻击防护, 开启则写入数组
-      "udp",  // UDP Flood 攻击防护, 开启则写入数组
-      "icmp",  // ICMP Flood 攻击防护, 开启则写入数组
-      "portscan",  // 端口扫描攻击防护, 开启则写入数组
-      "pingofdeath",  // Ping of Death 攻击防护, 开启则写入数组
-      "teardrop"  // Teardrop 攻击防护, 开启则写入数组
-      ]
-      }
-   */
-  static async setDDOS(ctx) {
-    const data = await post('xWall/api/sensor', ctx)
-    return data
-  }
 }

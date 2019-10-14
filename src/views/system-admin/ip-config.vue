@@ -36,7 +36,6 @@ export default {
         if (valid) {
           console.log('submit!')
           SystemAdmin.setIpOfCenter(this.ip).then(res => {
-            console.log('res', res)
             if (res.data === 'success') {
               this.$notify({
                 title: '成功',
