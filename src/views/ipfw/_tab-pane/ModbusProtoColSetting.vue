@@ -114,7 +114,7 @@ export default {
   },
   watch: {
     protocolSetting(val, oldVal) {
-      this.protocol.functionCodes = val
+      this.protocol.functionCodes = val.functionCodes
       this.$store.commit('sensor/SET_MODBUS_IN_TMP_WHITE_LIST', this.protocol)
     },
     dialogVisible(val, oldVal) {

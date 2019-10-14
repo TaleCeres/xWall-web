@@ -39,6 +39,7 @@ const state = {
     blacklist: {
       autoDeploy: true
     },
+    whitelist: []
   },
   dDosdialogVisible: false
 }
@@ -94,6 +95,7 @@ const mutations = {
   SET_IP_RULE(state, index) {
     if (state.ctx && state.ctx.protectedNodes.length > 0 && state.ctx.protectedNodes[index].whitelist) {
       state.ctx.protectedNodes[index].whitelist = state.tmpWhitelist
+      state.ctx.tmpProtectedNode = state.ctx.protectedNodes[index]
     }
   },
 }

@@ -20,7 +20,8 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog title="编辑IP规则" :visible.sync="dialogVisible" width="1000px"
+    <el-dialog v-loading="loading" 
+      title="编辑IP规则" :visible.sync="dialogVisible" width="1000px" 
       @close="handleCancelEdit">
       <IpfwSetting />
       <span slot="footer" class="dialog-footer">
@@ -42,6 +43,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       dialogVisible: false,
       index: -1
     }
@@ -97,10 +99,15 @@ export default {
       })
     },
     handleSaveEdit() {
+      this.loading = true
       this.$store.commit('sensor/SET_IP_RULE', this.index)
-      SensorModel.updateSensor().then(res => {
+      SensorModel.updateProtectNode().then(res => {
         this.dialogVisible = false
-      })      
+        this.loading = true
+        this.$router.push({
+          path: '/redirect'
+        })
+      })
     }
   }
 }
