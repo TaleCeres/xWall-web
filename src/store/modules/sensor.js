@@ -1,7 +1,9 @@
 /* 防火墙配置 */
 /* eslint-disable */
 const state = {
-  ctx: null, // 防火墙内容对象
+  ctx: {
+    mode: ''
+  }, // 防火墙内容对象
   tmpWhitelist: {
     enabled: false,
     dos: undefined,
@@ -58,6 +60,10 @@ const mutations = {
   },
   SET_DDOS_DIALOG_VISIBLE(state, bool) {
     state.dDosdialogVisible = bool
+  },
+  SET_MODE(state, mode) {
+    state.ctx.mode = mode
+    console.log('state.ctx', state.ctx)
   },
   // 初始化IP配置
   INIT_TMP_WHITE_LIST(state, index) {

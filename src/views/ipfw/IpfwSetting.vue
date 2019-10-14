@@ -2,7 +2,7 @@
   <div class="ipfw-setting">
     <el-form ref="form" :model="form" status-icon label-width="180px" class="form">
       <el-form-item label="名称描述">
-        <el-input v-model="form.name" class="item"  style="width: 570px"/>
+        <el-input v-model="form.name" class="item" style="width: 570px" />
       </el-form-item>
       <el-form :inline="true" label-width="180px">
         <el-form-item label="制造商">
@@ -27,7 +27,7 @@
         <el-checkbox v-model="whitelist.enabled" class="item">开启 访问权限和白名单</el-checkbox>
       </el-form-item>
       <el-form-item label="支持协议">
-        <el-checkbox-group v-model="form.types" class="item">
+        <el-checkbox-group v-model="form.types" class="item" @change="handleCheckBox">
           <el-checkbox label="modbus" name="types"></el-checkbox>
           <el-checkbox label="dnp3" name="types"></el-checkbox>
           <el-checkbox label="opc" name="types"></el-checkbox>
@@ -103,7 +103,7 @@ export default {
       whitelist: {
         enabled: true
       },
-      activeName: 'cip'
+      activeName: ''
     }
   },
   computed: {
@@ -123,12 +123,20 @@ export default {
   methods: {
     handleClick(tab, event) {
     },
+    handleCheckBox(list) {
+      let len = list.length
+      if (len >= 1) {
+        len -= 1
+      }
+      this.activeName = list[len] || 'modbus'
+    },
     canSetting(typeName) {
       return this.form.types.includes(typeName)
     },
     initCheckState() {
       this.whitelist = this.$store.state.sensor.tmpWhitelist
       this.form = this.$store.state.sensor.tmpProtectedNode
+      this.activeName = this.form.types[0] || ''
     }
   },
 }
