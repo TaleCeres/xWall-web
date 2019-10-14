@@ -38,38 +38,54 @@
       </el-form-item>
     </el-form>
     <el-tabs v-model="activeName" class="ipfw-tabs" @tab-click="handleClick">
-      <el-tab-pane v-if="whitelist.enabled" label="源IP端口" name="srcIpPort">用户管理</el-tab-pane>
-      <el-tab-pane v-if="whitelist.enabled" label="目标IP端口" name="desIpPort">配置管理</el-tab-pane>
+      <el-tab-pane v-if="whitelist.enabled" label="源IP端口" name="srcIpPort">
+        <SrcIpPortSetting />
+      </el-tab-pane>
+      <el-tab-pane v-if="whitelist.enabled" label="目标IP端口" name="desIpPort">
+        <DstIpPortSetting />
+      </el-tab-pane>
       <el-tab-pane v-if="canSetting('MODBUS')" key="tab-modbus" label="MODBUS" name="modbus">
         <ModbusProtoColSetting />
       </el-tab-pane>
       <el-tab-pane v-if="canSetting('DNP3')" key="tab-dnp3" label="DNP3" name="dnp3">
         <Dnp3ProtoColSetting />
       </el-tab-pane>
-      <el-tab-pane v-if="canSetting('OPC')" key="tab-opc" label="OPC" name="opc">定时任务补偿</el-tab-pane>
+      <el-tab-pane v-if="canSetting('OPC')" key="tab-opc" label="OPC" name="opc">
+        <OpcProtocolSetting />
+      </el-tab-pane>
       <el-tab-pane v-if="canSetting('IEC104')" key="tab-iec104" label="IEC104" name="iec104">
         <Iec104ProtoColSetting />
       </el-tab-pane>
       <el-tab-pane v-if="canSetting('CIP')" key="tab-cip" label="CIP" name="cip">
         <CipProtoColSetting />
       </el-tab-pane>
-      <el-tab-pane v-if="canSetting('PROFINET')" key="tab-profinet" label="PROFINET" name="profinet">定时任务补偿</el-tab-pane>
+      <el-tab-pane v-if="canSetting('PROFINET')" key="tab-profinet" label="PROFINET" name="profinet">
+        <ProfinetProtocolSetting />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+import SrcIpPortSetting from './_tab-pane/SrcIpPortSetting'
+import DstIpPortSetting from './_tab-pane/DstIpPortSetting'
 import ModbusProtoColSetting from './_tab-pane/ModbusProtoColSetting'
 import Dnp3ProtoColSetting from './_tab-pane/Dnp3ProtoColSetting'
+import OpcProtocolSetting from './_tab-pane/OpcProtocolSetting'
 import Iec104ProtoColSetting from './_tab-pane/Iec104Setting'
 import CipProtoColSetting from './_tab-pane/CipProtoColSetting'
+import ProfinetProtocolSetting from './_tab-pane/ProfinetProtocolSetting'
 export default {
   name: 'IpfwSetting',
   components: {
+    SrcIpPortSetting,
+    DstIpPortSetting,
     ModbusProtoColSetting,
     Dnp3ProtoColSetting,
+    OpcProtocolSetting,
     Iec104ProtoColSetting,
-    CipProtoColSetting
+    CipProtoColSetting,
+    ProfinetProtocolSetting
   },
   data() {
     return {
