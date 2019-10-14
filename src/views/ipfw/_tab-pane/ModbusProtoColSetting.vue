@@ -15,7 +15,6 @@
     </div>
     <div class="advanced">
       <p class="note">高级设置</p>
-      <p>V 已开启</p>
     </div>
   </div>
 </template>

@@ -3,8 +3,6 @@
     <div class="checked">
       <p class="note">协议完整性检查</p>
       <p class="is-open"><i class="el-icon-check"></i> 已开启</p>
-      {{ protocolSetting }}
-      {{ checkList }}
     </div>
     <div class="func-code">
       <p class="note">功能码</p>
