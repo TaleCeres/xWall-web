@@ -3,7 +3,7 @@
 const state = {
   ctx: null, // 防火墙内容对象
   tmpWhitelist: {
-    enabled: true,
+    enabled: false,
     dos: undefined,
     accessList: [],
     accessPorts: {},
@@ -29,6 +29,17 @@ const state = {
     },
     profinet: {}
   },
+  tmpProtectedNode: {
+    name: '',
+    make: '',
+    model: '',
+    ip: '',
+    netmask: '',
+    types: [],
+    blacklist: {
+      autoDeploy: true
+    },
+  },
   dDosdialogVisible: false
 }
 
@@ -51,6 +62,7 @@ const mutations = {
   INIT_TMP_WHITE_LIST(state, index) {
     if (state.ctx && state.ctx.protectedNodes.length > 0 && state.ctx.protectedNodes[index].whitelist) {
       state.tmpWhitelist = state.ctx.protectedNodes[index].whitelist
+      state.tmpProtectedNode = state.ctx.protectedNodes[index]
     }
   },
   // 设置协议

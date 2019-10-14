@@ -21,39 +21,39 @@
         </el-form-item>
       </el-form>
       <el-form-item label="黑名单">
-        <el-checkbox v-model="form.blacklist.autoDeploy" disabled class="item">自动部署</el-checkbox>
+        <el-checkbox v-model="blacklist.autoDeploy" disabled class="item">自动部署</el-checkbox>
       </el-form-item>
       <el-form-item label="访问权限和白名单">
-        <el-checkbox v-model="form.whitelist.enabled" class="item">开启 访问权限和白名单</el-checkbox>
+        <el-checkbox v-model="whitelist.enabled" class="item">开启 访问权限和白名单</el-checkbox>
       </el-form-item>
-      <el-form-item label="支持协议" prop="protocol">
-        <el-checkbox-group v-model="form.protocol" class="item">
-          <el-checkbox label="MODBUS" name="protocol"></el-checkbox>
-          <el-checkbox label="DNP3" name="protocol"></el-checkbox>
-          <el-checkbox label="OPC" name="protocol"></el-checkbox>
-          <el-checkbox label="IEC104" name="protocol"></el-checkbox>
-          <el-checkbox label="CIP" name="protocol"></el-checkbox>
-          <el-checkbox label="PROFINET" name="protocol"></el-checkbox>
+      <el-form-item label="支持协议">
+        <el-checkbox-group v-model="form.types" class="item">
+          <el-checkbox label="MODBUS" name="types"></el-checkbox>
+          <el-checkbox label="DNP3" name="types"></el-checkbox>
+          <el-checkbox label="OPC" name="types"></el-checkbox>
+          <el-checkbox label="IEC104" name="types"></el-checkbox>
+          <el-checkbox label="CIP" name="types"></el-checkbox>
+          <el-checkbox label="PROFINET" name="types"></el-checkbox>
         </el-checkbox-group>
       </el-form-item>
     </el-form>
     <el-tabs v-model="activeName" class="ipfw-tabs" @tab-click="handleClick">
-      <el-tab-pane v-if="form.whitelist.enabled" label="源IP端口" name="srcIpPort">用户管理</el-tab-pane>
-      <el-tab-pane v-if="form.whitelist.enabled" label="目标IP端口" name="desIpPort">配置管理</el-tab-pane>
-      <el-tab-pane v-if="canSetting('MODBUS')" label="MODBUS" name="modbus">
+      <el-tab-pane v-if="whitelist.enabled" label="源IP端口" name="srcIpPort">用户管理</el-tab-pane>
+      <el-tab-pane v-if="whitelist.enabled" label="目标IP端口" name="desIpPort">配置管理</el-tab-pane>
+      <el-tab-pane v-if="canSetting('MODBUS')" key="tab-modbus" label="MODBUS" name="modbus">
         <ModbusProtoColSetting />
       </el-tab-pane>
-      <el-tab-pane v-if="canSetting('DNP3')" label="DNP3" name="dnp3">
+      <el-tab-pane v-if="canSetting('DNP3')" key="tab-dnp3" label="DNP3" name="dnp3">
         <Dnp3ProtoColSetting />
       </el-tab-pane>
-      <el-tab-pane v-if="canSetting('OPC')" label="OPC" name="opc">定时任务补偿</el-tab-pane>
-      <el-tab-pane v-if="canSetting('CIP')" label="IEC104" name="iec104">
+      <el-tab-pane v-if="canSetting('OPC')" key="tab-opc" label="OPC" name="opc">定时任务补偿</el-tab-pane>
+      <el-tab-pane v-if="canSetting('IEC104')" key="tab-iec104" label="IEC104" name="iec104">
         <Iec104ProtoColSetting />
       </el-tab-pane>
-      <el-tab-pane v-if="canSetting('CIP')" label="CIP" name="cip">
+      <el-tab-pane v-if="canSetting('CIP')" key="tab-cip" label="CIP" name="cip">
         <CipProtoColSetting />
       </el-tab-pane>
-      <el-tab-pane v-if="canSetting('PROFINET')" label="PROFINET" name="profinet">定时任务补偿</el-tab-pane>
+      <el-tab-pane v-if="canSetting('PROFINET')" key="tab-profinet" label="PROFINET" name="profinet">定时任务补偿</el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -79,27 +79,44 @@ export default {
         model: '',
         ip: '',
         netmask: '',
-        protocol: [],
+        types: [],
         blacklist: {
           autoDeploy: true
         },
-        whitelist: {
-          enabled: true
-        }
+      },
+      blacklist: {
+        autoDeploy: true,
+      },
+      whitelist: {
+        enabled: false
       },
       activeName: 'cip'
     }
   },
-  computed: {},
+  computed: {
+    dialogVisible() {
+      return this.$store.state.sensor.dDosdialogVisible
+    }
+  },
+  watch: {
+    dialogVisible() {
+      this.initCheckState()
+    }
+  },
   created() { },
-  mounted() { },
+  mounted() {
+    this.initCheckState()
+  },
   methods: {
     handleClick(tab, event) {
-      // console.log(tab, event)
     },
-    canSetting(protocolName) {
-      return this.form.protocol.includes(protocolName)
+    canSetting(typeName) {
+      return this.form.types.includes(typeName)
     },
+    initCheckState() {
+      this.whitelist = this.$store.state.sensor.tmpWhitelist
+      this.form = this.$store.state.sensor.tmpProtectedNode
+    }
   },
 }
 </script>

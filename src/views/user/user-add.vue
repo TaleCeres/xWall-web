@@ -1,5 +1,5 @@
 <template>
-  <div class='user-container'>
+  <div class="user-container">
     <el-form v-if="auth==='admin'" ref="ruleForm" :model="ruleForm" :rules="rules" status-icon label-width="200px" class="user-ruleForm">
       <el-form-item label="用户名" prop="name">
         <el-input v-model="ruleForm.name"></el-input>
