@@ -9,8 +9,9 @@
         <el-table-column label="工控协议" prop="types" />
         <el-table-column align="center">
           <template slot="header">
-            <el-button size="mini" type="success" @click="handleAdd">新增 +
-            </el-button>
+            <!-- <el-button size="mini" type="success" @click="handleAdd">新增 +
+            </el-button> -->
+            操作
           </template>
           <template slot-scope="scope">
             <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑
@@ -19,7 +20,8 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog title="编辑IP规则" :visible.sync="dialogVisible" width="1000px">
+    <el-dialog title="编辑IP规则" :visible.sync="dialogVisible" width="1000px"
+      @close="handleCancelEdit">
       <IpfwSetting />
       <span slot="footer" class="dialog-footer">
         <el-button size="mini" @click="handleCancelEdit">取 消</el-button>
@@ -31,6 +33,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import SensorModel from '@/models/sensor'
 import IpfwSetting from './IpfwSetting'
 export default {
   name: 'IpfwIndex',
@@ -76,7 +79,7 @@ export default {
       this.$store.commit('sensor/SET_DDOS_DIALOG_VISIBLE', val)
     },
     index(val, oldVal) {
-      this.$store.commit('sensor/INIT_TMP_WHITE_LIST', val) 
+      this.$store.commit('sensor/INIT_TMP_WHITE_LIST', val)
     }
   },
   methods: {
@@ -89,10 +92,15 @@ export default {
     },
     handleCancelEdit() {
       this.dialogVisible = false
+      this.$router.push({
+        path: '/redirect'
+      })
     },
     handleSaveEdit() {
       this.$store.commit('sensor/SET_IP_RULE', this.index)
-      this.dialogVisible = false
+      SensorModel.updateSensor().then(res => {
+        this.dialogVisible = false
+      })      
     }
   }
 }

@@ -22,43 +22,43 @@
               <el-input v-model="protocol.discreteInputs.addressRange" placeholder="其实地址范围(下限, 上限)" class="item" />
             </el-col>
             <el-col :span="7">
-              <el-input v-model="protocol.discreteInputs.quantityRange" class="item" />
+              <el-input v-model="protocol.discreteInputs.quantityRange" placeholder="数量范围(下限, 上限)" class="item" />
             </el-col>
           </el-row>
         </el-form-item>
         <el-form-item label="只读寄存器">
           <el-row :gutter="10">
             <el-col :span="7">
-              <el-input v-model="protocol.inputRegisters.addressRange" class="item" />
+              <el-input v-model="protocol.inputRegisters.addressRange" placeholder="其实地址范围(下限, 上限)" class="item" />
             </el-col>
             <el-col :span="7">
-              <el-input v-model="protocol.inputRegisters.quantityRange" class="item" />
+              <el-input v-model="protocol.inputRegisters.quantityRange" placeholder="数量范围(下限, 上限)" class="item" />
             </el-col>
           </el-row>
         </el-form-item>
         <el-form-item label="读写布尔">
           <el-row :gutter="10">
             <el-col :span="7">
-              <el-input v-model="protocol.coils.addressRange" class="item" />
+              <el-input v-model="protocol.coils.addressRange" placeholder="其实地址范围(下限, 上限)" class="item" />
             </el-col>
             <el-col :span="7">
-              <el-input v-model="protocol.coils.quantityRange" class="item" />
+              <el-input v-model="protocol.coils.quantityRange" placeholder="数量范围(下限, 上限)" class="item" />
             </el-col>
             <el-col :span="7">
-              <el-input v-model="protocol.coils.valueRange" class="item" />
+              <el-input v-model="protocol.coils.valueRange" placeholder="数值选项，逗号分隔" class="item" />
             </el-col>
           </el-row>
         </el-form-item>
         <el-form-item label="读写寄存器">
           <el-row :gutter="10">
             <el-col :span="7">
-              <el-input v-model="protocol.holdingRegisters.addressRange" class="item" />
+              <el-input v-model="protocol.holdingRegisters.addressRange" placeholder="其实地址范围(下限, 上限)" class="item" />
             </el-col>
             <el-col :span="7">
-              <el-input v-model="protocol.holdingRegisters.quantityRange" class="item" />
+              <el-input v-model="protocol.holdingRegisters.quantityRange" placeholder="数量范围(下限, 上限)" class="item" />
             </el-col>
             <el-col :span="7">
-              <el-input v-model="protocol.holdingRegisters.valueRange" class="item" />
+              <el-input v-model="protocol.holdingRegisters.valueRange" placeholder="数值选项，逗号分隔" class="item" />
             </el-col>
           </el-row>
         </el-form-item>

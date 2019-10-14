@@ -56,7 +56,6 @@ const mutations = {
     state.ctx.commonAttacksPrevention = commonAttacksPrevention
   },
   SET_DDOS_DIALOG_VISIBLE(state, bool) {
-    console.log('state.tmpWhitelist', state.tmpWhitelist)
     state.dDosdialogVisible = bool
   },
   // 初始化IP配置
@@ -74,7 +73,6 @@ const mutations = {
     state.tmpWhitelist.accessPorts = obj
   },
   SET_MODBUS_IN_TMP_WHITE_LIST(state, obj) {
-    console.log('obj', obj)
     state.tmpWhitelist.modbus = obj
   },
   SET_DNP3_IN_TMP_WHITE_LIST(state, obj) {
@@ -97,7 +95,7 @@ const mutations = {
     if (state.ctx && state.ctx.protectedNodes.length > 0 && state.ctx.protectedNodes[index].whitelist) {
       state.ctx.protectedNodes[index].whitelist = state.tmpWhitelist
     }
-  }
+  },
 }
 
 const actions = {

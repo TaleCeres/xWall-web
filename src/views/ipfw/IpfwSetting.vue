@@ -96,15 +96,12 @@ export default {
         ip: '',
         netmask: '',
         types: [],
-        blacklist: {
-          autoDeploy: true
-        },
       },
       blacklist: {
         autoDeploy: true,
       },
       whitelist: {
-        enabled: false
+        enabled: true
       },
       activeName: 'cip'
     }
