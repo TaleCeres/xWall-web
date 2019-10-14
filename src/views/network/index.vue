@@ -93,8 +93,9 @@ export default {
       this.dialogFormVisible = true
     },
     async handleUpdate() {
-      let msg = await networkModel.updateSensor(this.network)
+      let msg = await networkModel.updateSensor()
       this.dialogFormVisible = false
+      this.getNetworkList()
     }
   }
 }
