@@ -31,7 +31,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import IpfwSetting from './ipfwSetting'
+import IpfwSetting from './IpfwSetting'
 export default {
   name: 'IpfwIndex',
   components: {

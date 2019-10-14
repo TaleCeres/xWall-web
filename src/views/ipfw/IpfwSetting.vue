@@ -25,7 +25,7 @@ import Dnp3ProtoColSetting from './_tab-pane/Dnp3ProtoColSetting'
 import Iec104ProtoColSetting from './_tab-pane/Iec104Setting'
 import CipProtoColSetting from './_tab-pane/CipProtoColSetting'
 export default {
-  name: 'ipfwSetting',
+  name: 'IpfwSetting',
   components: {
     ModbusProtoColSetting,
     Dnp3ProtoColSetting,
