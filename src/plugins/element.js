@@ -35,6 +35,8 @@ import {
   Checkbox,
   Loading,
   Notification,
+  RadioGroup,
+  Radio
 } from 'element-ui'
 import {
   loadPlugins
@@ -75,5 +77,7 @@ loadPlugins([
   CheckboxGroup,
   Checkbox,
   Loading,
+  RadioGroup,
+  Radio
 ])
 Vue.prototype.$notify = Notification

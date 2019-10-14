@@ -56,6 +56,7 @@ const mutations = {
     state.ctx.commonAttacksPrevention = commonAttacksPrevention
   },
   SET_DDOS_DIALOG_VISIBLE(state, bool) {
+    console.log('state.tmpWhitelist', state.tmpWhitelist)
     state.dDosdialogVisible = bool
   },
   // 初始化IP配置
@@ -66,6 +67,12 @@ const mutations = {
     }
   },
   // 设置协议
+  SET_SRC_IP_IN_TMP_WHITE_LIST(state, obj) {
+    state.tmpWhitelist.accessList = obj
+  },
+  SET_DST_IP_IN_TMP_WHITE_LIST(state, obj) {
+    state.tmpWhitelist.accessPorts = obj
+  },
   SET_MODBUS_IN_TMP_WHITE_LIST(state, obj) {
     state.tmpWhitelist.modbus = obj
   },
