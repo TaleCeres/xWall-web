@@ -1,26 +1,21 @@
 <template>
-  <div :id="id" style="height: 400px"></div>
+  <div :id="id" style="height: 90%"></div>
 </template>
 
 <script>
 import resize from '@/mixins/resize'
-
 export default {
-  name: 'NetflowPieChart',
+  name: 'EventPieChart',
   mixins: [resize],
   props: {
     id: {
       type: String,
-      default: 'NetflowPieChart'
+      default: 'EventPieChart'
     },
     chartData: {
       type: Array,
       default: () => []
     },
-    title: {
-      type: String,
-      default: ''
-    }
   },
   data() {
     return {
@@ -30,21 +25,18 @@ export default {
   computed: {
     option() {
       return {
-        title: {
-          text: this.title,
+        tooltip: {
+          trigger: 'item',
         },
         series: [
           {
-            name: '流量',
+            name: '事件',
             data: this.chartData,
             type: 'pie',
             radius: [0, '50%'],
             label: {
               normal: {
                 show: true,
-                formatter(params) {
-                  return `${params.name}:${params.value}KB`
-                },
                 textStyle: {
                   fontSize: 15
                 }
