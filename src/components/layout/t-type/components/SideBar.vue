@@ -3,10 +3,10 @@
     <el-menu style="margin-bottom:50px" :default-active="defaultActive" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
       <template v-for="item in routes">
         <!-- 一级菜单(不含二级菜单) -->
-        <router-link v-if="!canUnflod(item)" :key="item.name" :to="item.path">
-          <el-menu-item :index="item.name">
-            <i :class="item.meta.icon"></i>
-            <span slot="title">{{ item.meta.title }}</span>
+        <router-link v-if="!canUnflod(item)" :key="getChildren(item).name" :to="getChildren(item).path">
+          <el-menu-item :index="getChildren(item).name">
+            <i :class="getChildren(item).meta.icon"></i>
+            <span slot="title">{{ getChildren(item).meta.title  }}</span>
           </el-menu-item>
         </router-link>
 
@@ -44,7 +44,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
 import { mapGetters } from 'vuex'
 import { flatten } from 'lodash'
 export default {
@@ -74,6 +74,9 @@ export default {
     // this._testRouterAttrs()
   },
   methods: {
+    getChildren(item) {
+      return item.children[0]
+    },
     canUnflod(route) {
       if (route.children && route.children.length === 1 && !route.children.children) return false
       return true

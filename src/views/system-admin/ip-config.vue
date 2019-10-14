@@ -35,7 +35,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           console.log('submit!')
-          SystemAdmin.setIpOfCenter(this.ip).then(res => {
+          SystemAdmin.setIpOfCenter(this.ruleForm.ip).then(res => {
             if (res.data === 'success') {
               this.$notify({
                 title: '成功',
