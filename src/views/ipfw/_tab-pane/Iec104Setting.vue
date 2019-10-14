@@ -2,7 +2,7 @@
   <div class="iec104">
     <div class="checked">
       <p class="note">协议完整性检查</p>
-      <p>V 已开启</p>
+      <p class="is-open"><i class="el-icon-check"></i> 已开启</p>
       {{ protocolSetting }}
       {{ checkList }}
     </div>
