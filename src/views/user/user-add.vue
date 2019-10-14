@@ -91,9 +91,6 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          console.log('submit!')
-          console.log(this.ruleForm.name, this.ruleForm.pass, this.ruleForm.authority)
-
           User.createUser(this.ruleForm.name, this.ruleForm.pass, this.ruleForm.authority)
             .then(res => {
               if (res.error) {

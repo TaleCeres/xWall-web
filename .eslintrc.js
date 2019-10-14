@@ -62,6 +62,7 @@ module.exports = {
     'vue/prop-name-casing': ['error', 'camelCase'], // prop name 使用小驼峰命名法
     'vue/attribute-hyphenation': ['error', 'always'], // 特性name 使用连字符: <MyComponent my-prop="prop" />
     'vue/no-unused-components': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'vue/no-side-effects-in-computed-properties': 'off',
     /* js 规范
 
     */
