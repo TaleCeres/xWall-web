@@ -29,11 +29,12 @@ import {
   Switch,
   DatePicker,
   Pagination,
-  Notification,
   Tabs,
   TabPane,
   CheckboxGroup,
   Checkbox,
+  Loading,
+  Notification,
 } from 'element-ui'
 import {
   loadPlugins
@@ -73,5 +74,6 @@ loadPlugins([
   TabPane,
   CheckboxGroup,
   Checkbox,
+  Loading,
 ])
 Vue.prototype.$notify = Notification

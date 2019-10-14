@@ -42,7 +42,7 @@ export default {
     },
   },
   created() {},
-  mounted() {},
+  mounted() { this.addTag() },
   methods: {
     handleScroll(e) {
       const eventDelta = e.wheelDelta || -e.deltaY * 40
@@ -79,7 +79,6 @@ export default {
       }
     },
     checkoutTag() {
-      console.log('click')
     }
   },
 }
@@ -92,6 +91,7 @@ export default {
     height 32px
     line-height 28px
     overflow hidden
+    box-shadow 0px 5px 5px -5px #eee
     .router-box {
       width auto
       .tag-item {
