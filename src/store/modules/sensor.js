@@ -53,11 +53,24 @@ const mutations = {
       state.tmpWhitelist = state.ctx.protectedNodes[index].whitelist
     }
   },
+  // 设置协议
+  SET_MODBUS_IN_TMP_WHITE_LIST(state, obj) {
+    state.tmpWhitelist.modbus = obj
+  },
+  SET_DNP3_IN_TMP_WHITE_LIST(state, obj) {
+    state.tmpWhitelist.dnp3 = obj
+  },
+  SET_OPC_IN_TMP_WHITE_LIST(state, obj) {
+    state.tmpWhitelist.opc = obj
+  },
   SET_IEC104_IN_TMP_WHITE_LIST(state, obj) {
     state.tmpWhitelist.iec104 = obj
   },
   SET_CIP_IN_TMP_WHITE_LIST(state, obj) {
     state.tmpWhitelist.cip = obj
+  },
+  SET_PROFINET_IN_TMP_WHITE_LIST(state, obj) {
+    state.tmpWhitelist.profinet = obj
   },
   // 「ipfw/index」保存时，修改ctx.protectedNodes数组
   SET_IP_RULE(state, index) {
