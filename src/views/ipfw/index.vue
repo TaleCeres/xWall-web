@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      index: 0
+      index: -1
     }
   },
   computed: {
@@ -86,8 +86,6 @@ export default {
     handleEdit(index, row) {
       this.dialogVisible = true
       this.index = index
-      // console.log('data', this.$store.state.sensor.tmpWhitelist)
-      // 弹出框取消，则再执行 sensor/INIT_TMP_WHITE_LIST
     },
     handleCancelEdit() {
       this.dialogVisible = false
