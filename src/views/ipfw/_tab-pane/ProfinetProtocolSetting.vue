@@ -1,6 +1,9 @@
 <template>
-  <div>
-    Profinet协议
+  <div class="profinet">
+    <div class="checked">
+      <p class="note">动态端口检查</p>
+      <p class="is-open"><i class="el-icon-check"></i> 已开启</p>
+    </div>
   </div>
 </template>
 

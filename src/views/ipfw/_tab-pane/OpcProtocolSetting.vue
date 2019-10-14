@@ -1,6 +1,13 @@
 <template>
-  <div>
-    OPC协议
+  <div class="opc">
+    <div class="checked">
+      <p class="note">协议完整性检查</p>
+      <p class="is-open"><i class="el-icon-check"></i> 已开启</p>
+    </div>
+    <div class="checked">
+      <p class="note">动态端口检查</p>
+      <p class="is-open"><i class="el-icon-check"></i> 已开启</p>
+    </div>
   </div>
 </template>
 
@@ -12,10 +19,16 @@ export default {
     return {}
   },
   computed: {},
-  created() {},
-  mounted() {},
+  created() { },
+  mounted() { },
   methods: {},
 }
 </script>
 
-<style scoped lang="stylus" rel="stylesheet/stylus"></style>
+<style scoped lang="stylus" rel="stylesheet/stylus">
+.opc {
+  .checked {
+    margin-bottom 5px
+  }
+}
+</style>

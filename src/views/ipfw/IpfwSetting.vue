@@ -2,7 +2,7 @@
   <div class="ipfw-setting">
     <el-form ref="form" :model="form" status-icon label-width="180px" class="form">
       <el-form-item label="名称描述">
-        <el-input v-model="form.name" class="item" />
+        <el-input v-model="form.name" class="item"  style="width: 570px"/>
       </el-form-item>
       <el-form :inline="true" label-width="180px">
         <el-form-item label="制造商">

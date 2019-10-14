@@ -19,7 +19,7 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog title="编辑IP规则" :visible.sync="dialogVisible" width="800px">
+    <el-dialog title="编辑IP规则" :visible.sync="dialogVisible" width="1000px">
       <IpfwSetting />
       <span slot="footer" class="dialog-footer">
         <el-button size="mini" @click="handleCancelEdit">取 消</el-button>

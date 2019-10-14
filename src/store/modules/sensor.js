@@ -74,6 +74,7 @@ const mutations = {
     state.tmpWhitelist.accessPorts = obj
   },
   SET_MODBUS_IN_TMP_WHITE_LIST(state, obj) {
+    console.log('obj', obj)
     state.tmpWhitelist.modbus = obj
   },
   SET_DNP3_IN_TMP_WHITE_LIST(state, obj) {
