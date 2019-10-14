@@ -30,6 +30,9 @@ export default {
   computed: {
     option() {
       return {
+        tooltip: {
+          trigger: 'axis',
+        },
         xAxis: {
           type: 'category',
           data: this.dateList
