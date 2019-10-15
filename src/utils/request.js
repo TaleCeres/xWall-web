@@ -2,7 +2,7 @@
 import axios from 'axios'
 import store from '@/store'
 import { Notification } from 'element-ui'
-import { getToken } from './cookie'
+import { getToken, removeToken } from './cookie'
 
 // 创建请求实例
 const _axios = axios.create({
@@ -22,7 +22,7 @@ _axios.interceptors.request.use(
   },
 )
 
-// request 拦截
+// response 拦截
 _axios.interceptors.response.use(response => {
   const {
     status,
@@ -30,6 +30,7 @@ _axios.interceptors.response.use(response => {
     data,
     error
   } = response
+
   handleRes(response, data)
 
   if (status > 200) {
@@ -44,6 +45,18 @@ _axios.interceptors.response.use(response => {
   }
   return data
   }, error => {
+    const { status, data } = error.response
+    if (status === 401) {
+      const { message } = data
+      Notification({
+        message: message,
+        type: 'warning',
+        duration: 5 * 1000
+      })
+      removeToken()
+      return message
+    }
+
     let message = undefined
     if (error.response) {
       message = error.response.data
@@ -115,11 +128,11 @@ function handleRes(res, data) {
     baseURL,
     url: intactURL,
     method,
-    headers: {
-      token
-    }
+    // headers: {
+    //   token
+    // }
   } = res.config
-  if (intactURL.split(baseURL)[1] === '/login' && method === 'post') data.token = token
+  if (intactURL.split(baseURL)[1] === '/configCentre/login' && method === 'post') data.token = res.headers.token
   if (intactURL.split(baseURL)[1] === '/xWall/api/sensor' && method === 'get') {
     const ctx = data.data[0]
     store.commit('sensor/INIT_CTX', ctx)

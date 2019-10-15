@@ -16,6 +16,7 @@
 <script type="text/ecmascript-6">
 import { mapActions } from 'vuex'
 import defaultAvatar from 'assets/images/company/logo.png'
+import UserModel from '@/models/user'
 export default {
   name: 'UserCard',
   components: {},
@@ -32,9 +33,12 @@ export default {
     ...mapActions({
       logout: 'user/logout',
     }),
-    handleLogout() {
-      this.logout()
-      window.location.reload(true)
+    async handleLogout() {
+      const res = await UserModel.logout()
+      if (res.message === 'logout success') {
+        this.logout()
+        window.location.reload(true)
+      }
     },
   },
 }

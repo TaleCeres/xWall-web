@@ -17,7 +17,10 @@ export default class User {
       username,
       password
     })
-    saveToken(data.token)
+    if (data.token) {
+      saveToken(data.token)
+    }
+
     return data
   }
 
@@ -54,7 +57,7 @@ export default class User {
   // 修改用户(目前只能修改密码)
   static async updateUser(username, password) {
     const data = await post('configCentre/api/user/password', {
-      username, 
+      username,
       password
     })
     return data
