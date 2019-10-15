@@ -95,16 +95,16 @@ export default {
   bottom 100px
   right 20px
 }
-  .side-btn {
-    position absolute
-    top 150px
-    background-color #eaeaea
-    padding 12px 0
-    border-top-right-radius 5px
-    border-bottom-right-radius 5px
-    cursor pointer
-    z-index 100
-  }
+.side-btn {
+  position absolute
+  top 150px
+  background-color #eaeaea
+  padding 12px 0
+  border-top-right-radius 5px
+  border-bottom-right-radius 5px
+  cursor pointer
+  z-index 100
+}
 .icon-font {
   margin 10px 0
   font-size 15px

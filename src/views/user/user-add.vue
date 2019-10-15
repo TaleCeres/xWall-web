@@ -17,7 +17,7 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button class="btn-create" @click="submitForm('ruleForm')">创建用户</el-button>
+        <el-button class="btn-create" type="primary" @click="submitForm">创建用户</el-button>
       </el-form-item>
     </el-form>
     <div v-else>您的权限不够</div>
@@ -52,6 +52,7 @@ export default {
       }
     }
     return {
+      loading: false,
       ruleForm: {
         name: '',
         pass: '',
@@ -59,26 +60,18 @@ export default {
         authority: ''
       },
       rules: {
-        name: [{
-          required: true,
-          message: '请输入活动名称',
-          trigger: 'blur'
-        }],
-        pass: [{
-          required: true,
-          validator: validatePass,
-          trigger: 'blur'
-        }],
-        checkPass: [{
-          required: true,
-          validator: validatePass2,
-          trigger: 'blur'
-        }],
-        authority: [{
-          required: true,
-          message: '请选择活动区域',
-          trigger: 'change'
-        }]
+        name: [
+          { required: true, message: '请输入活动名称', trigger: 'blur' }
+        ],
+        pass: [
+          { required: true, validator: validatePass, trigger: 'blur' }
+        ],
+        checkPass: [
+          { required: true, validator: validatePass2, trigger: 'blur' }
+        ],
+        authority: [
+          { required: true, message: '请选择活动区域', trigger: 'change' }
+        ]
       },
     }
   },
@@ -88,26 +81,37 @@ export default {
     ])
   },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          User.createUser(this.ruleForm.name, this.ruleForm.pass, this.ruleForm.authority)
-            .then(res => {
-              if (res.error) {
-                this.$notify({
-                  title: '失败',
-                  message: res.error,
-                  type: 'error'
-                })
-              } else {
-                this.$notify({
-                  title: '成功',
-                  message: '添加用户成功',
-                  type: 'success'
-                })
-              }
+    createUser() {
+      User.createUser(this.ruleForm.name, this.ruleForm.pass, this.ruleForm.authority)
+        .then(res => {
+          if (res.error) {
+            this.$notify({
+              title: '失败',
+              message: res.error,
+              type: 'error'
             })
+          } else {
+            this.$notify({
+              title: '成功',
+              message: '添加用户成功',
+              type: 'success'
+            })
+            this.$router.push({
+              path: '/user/list'
+            })
+          }
+        })
+    },
+    submitForm() {
+      this.$refs.ruleForm.validate(valid => {
+        if (valid) {
+          this.createUser()
         } else {
+          this.$notify({
+            title: '失败',
+            message: '请确认参数',
+            type: 'info'
+          })
           return false
         }
       })
@@ -133,22 +137,6 @@ export default {
   width 100%
 }
 .btn-create {
-  background-color #289E90
-  color #ffffff
-  font-size 15px
-  margin-left -201px
-}
-.btn-create:hover,
-.btn-create:active,
-.btn-create:focus {
-  background-color #289E90
-  color #ffffff
-  font-size 15px
-  margin-left -201px
-}
-.btn-create:active {
-  background-color #289E90
-  color #ffffff
   font-size 15px
   margin-left -201px
 }

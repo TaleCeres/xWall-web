@@ -1,5 +1,9 @@
 import Vue from 'vue'
 import {
+  MessageBox,
+  Message,
+  Notification,
+  Loading,
   Icon,
   Button,
   Container,
@@ -33,16 +37,15 @@ import {
   TabPane,
   CheckboxGroup,
   Checkbox,
-  Loading,
-  Notification,
   RadioGroup,
-  Radio
+  Radio,
 } from 'element-ui'
 import {
   loadPlugins
 } from '../utils/index'
 
 loadPlugins([
+  Loading,
   Icon,
   Button,
   Container,
@@ -76,8 +79,9 @@ loadPlugins([
   TabPane,
   CheckboxGroup,
   Checkbox,
-  Loading,
   RadioGroup,
   Radio
 ])
 Vue.prototype.$notify = Notification
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$message = Message

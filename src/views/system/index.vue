@@ -1,5 +1,5 @@
 <template>
-  <div class="system" v-loading.fullscreen.lock="loading">
+  <div v-loading.fullscreen.lock="loading" class="system">
     <div class="title">全局配置</div>
     <el-form ref="form" label-width="180px" class="form">
       <el-form-item label="模式">
