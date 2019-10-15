@@ -19,7 +19,7 @@
         <el-form-item label="只读布尔">
           <el-row :gutter="10">
             <el-col :span="7">
-              <el-input v-model="protocol.discreteInputs.addressRange" placeholder="其实地址范围(下限, 上限)" class="item" />
+              <el-input v-model="protocol.discreteInputs.addressRange" placeholder="起始地址范围(下限, 上限)" class="item" />
             </el-col>
             <el-col :span="7">
               <el-input v-model="protocol.discreteInputs.quantityRange" placeholder="数量范围(下限, 上限)" class="item" />
@@ -29,7 +29,7 @@
         <el-form-item label="只读寄存器">
           <el-row :gutter="10">
             <el-col :span="7">
-              <el-input v-model="protocol.inputRegisters.addressRange" placeholder="其实地址范围(下限, 上限)" class="item" />
+              <el-input v-model="protocol.inputRegisters.addressRange" placeholder="起始地址范围(下限, 上限)" class="item" />
             </el-col>
             <el-col :span="7">
               <el-input v-model="protocol.inputRegisters.quantityRange" placeholder="数量范围(下限, 上限)" class="item" />
@@ -39,7 +39,7 @@
         <el-form-item label="读写布尔">
           <el-row :gutter="10">
             <el-col :span="7">
-              <el-input v-model="protocol.coils.addressRange" placeholder="其实地址范围(下限, 上限)" class="item" />
+              <el-input v-model="protocol.coils.addressRange" placeholder="起始地址范围(下限, 上限)" class="item" />
             </el-col>
             <el-col :span="7">
               <el-input v-model="protocol.coils.quantityRange" placeholder="数量范围(下限, 上限)" class="item" />
@@ -52,7 +52,7 @@
         <el-form-item label="读写寄存器">
           <el-row :gutter="10">
             <el-col :span="7">
-              <el-input v-model="protocol.holdingRegisters.addressRange" placeholder="其实地址范围(下限, 上限)" class="item" />
+              <el-input v-model="protocol.holdingRegisters.addressRange" placeholder="起始地址范围(下限, 上限)" class="item" />
             </el-col>
             <el-col :span="7">
               <el-input v-model="protocol.holdingRegisters.quantityRange" placeholder="数量范围(下限, 上限)" class="item" />
