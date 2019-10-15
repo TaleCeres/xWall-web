@@ -5,15 +5,6 @@
         <img class="avatar" :src="defaultAvatar" alt="头像">
       </div>
       <el-dropdown-menu slot="dropdown" class="detail">
-        <el-dropdown-item>
-          <router-link to="/home">用户信息</router-link>
-        </el-dropdown-item>
-        <el-dropdown-item>
-          <router-link to="/admin/config">页面配置</router-link>
-        </el-dropdown-item>
-        <el-dropdown-item>
-          <a target="_blank" href="https://github.com/TaleCeres/ceres-admin">Github地址</a>
-        </el-dropdown-item>
         <el-dropdown-item divided icon="el-icon-switch-button" @click.native="handleLogout">
           注销
         </el-dropdown-item>

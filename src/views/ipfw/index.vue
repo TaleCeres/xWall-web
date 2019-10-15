@@ -21,7 +21,7 @@
       </el-table>
     </div>
     <el-dialog v-loading.fullscreen.lock="loading" 
-      element-loading-text="更新配置..."
+      element-loading-text="更新配置"
       element-loading-spinner="el-icon-loading"
       title="编辑IP规则" :visible.sync="dialogVisible" width="1000px" 
       @close="handleCancelEdit">

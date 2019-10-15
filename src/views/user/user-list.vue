@@ -9,9 +9,7 @@
       </el-table-column>
       <el-table-column label='操作'>
         <template slot-scope="scope">
-          <el-button class='el-icon-delete'
-          @click.native.prevent="deleteRow(scope.$index, dataList)" 
-          />
+          <el-button class='el-icon-delete' @click.native.prevent="deleteRow(scope.$index, dataList)" />
         </template></el-table-column>
     </el-table>
     <div v-else style="margin:auto 0">您的权限不够</div>
@@ -54,8 +52,7 @@ export default {
         }
       })
     },
-    deleteRow(index, rows) {
-      // console.log(rows[index].username)
+    deleteUser(index, rows) {
       User.deleteUser(rows[index].username).then(res => {
         if (res.error) {
           this.$notify({
@@ -71,6 +68,21 @@ export default {
           })
         }
         this.getUser()
+      })
+    },
+    deleteRow(index, rows) {
+      // console.log(rows[index].username)
+      this.$confirm('此操作将永久删除用户, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.deleteUser(index, rows)
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
       })
     }
   },
