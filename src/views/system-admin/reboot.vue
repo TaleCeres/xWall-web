@@ -17,16 +17,18 @@ export default {
     }
   },
   methods: {
-    handleReboot() {
-      SystemAdmin.setIpOfCenter().then(res => {
-        if (res.data === 'success') {
-          this.$notify({
-            title: '成功',
-            message: '重启成功',
-            type: 'success'
-          })
-        }
+    async handleReboot() {
+      const res = await SystemAdmin.rebootDevice({
+        ip: this.$store.state.sensor.ctx.ip
       })
+
+      if (res.data === 'success') {
+        this.$notify({
+          title: '成功',
+          message: '重启成功',
+          type: 'success'
+        })
+      }
     }
   }
 }
