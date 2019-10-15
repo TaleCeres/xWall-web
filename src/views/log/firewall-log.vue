@@ -5,32 +5,25 @@
       </el-date-picker>
       <el-input v-model="srcIp" placeholder="源IP地址"></el-input>
       <el-input v-model="dstIp" placeholder="目的IP地址"></el-input>
-      <el-button class='btn-search' icon="el-icon-search"></el-button>
+      <el-button class='btn-search' icon="el-icon-search" @click="getFireWallLog"></el-button>
     </div>
     <div class='middle-child'>
       <el-table :data="tableData" style="width: 100%" border :default-sort="{prop: 'date', order: 'descending'}" :header-cell-style="{'background-color':'#F2F2F2'}">
-        <el-table-column prop="receivedAt" label="事件时间" sortable width="180">
-        </el-table-column>
-        <el-table-column prop="message" label="事件描述" sortable width="180">
-        </el-table-column>
-        <el-table-column prop="srcIp" label="源IP地址" :formatter="formatter">
-        </el-table-column>
-        <el-table-column prop="srcPort" label="源端口" sortable width="180">
-        </el-table-column>
-        <el-table-column prop="dstIp" label="目的IP地址" sortable width="180">
-        </el-table-column>
-        <el-table-column prop="dstPort" label="目的端口" sortable width="180">
-        </el-table-column>
-        <el-table-column prop="protocolName" label="L4协议" sortable width="180">
-        </el-table-column>
+        <el-table-column prop="receivedAt" label="事件时间" sortable width="220" />
+        <el-table-column prop="message" label="事件描述" sortable width="300" />
+        <el-table-column prop="srcIp" label="源IP地址" sortable width="120" />
+        <el-table-column prop="srcPort" label="源端口" sortable width="100" />
+        <el-table-column prop="dstIp" label="目的IP地址" sortable width="120" />
+        <el-table-column prop="dstPort" label="目的端口" sortable width="120" />
+        <el-table-column prop="protocolName" label="L4协议" sortable width="100" />
         <el-table-column label='操作'>
           <template slot-scope="scope">
             <div style='border-radius:4px;text-align: center;width:38px;height:24px;background-color:#289E90;color:#ffffff'
-              @click="watch(scope.row)" 
-            >
+              @click="watch(scope.row)" >
               查看
             </div>
-          </template></el-table-column>
+          </template>
+          </el-table-column>
       </el-table>
     </div>
     <div class='bottom-child'>
@@ -74,21 +67,22 @@ export default {
   name: 'FirewallLog',
   data() {
     return {
+      formLabelWidth: '120px',
       time: '',
       srcIp: '',
       dstIp: '',
-      size: '',
-      page: '',
+      size: 10,
+      page: 0,
       value: '',
       tableData: [],
       currentPage: 1,
-      total: '',
+      total: 0,
       dialogFormVisible: false,
       form: {}
     }
   },
   mounted() {
-    this.getFireWallLog()
+    // this.getFireWallLog()
   },
   methods: {
     watch(data) {
@@ -99,12 +93,12 @@ export default {
       return row.address
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`)
       this.size = val
+      this.getFireWallLog()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`)
       this.page = val
+      this.getFireWallLog()
     },
     async getFireWallLog() {
       const fireWallLogList = await LogModel.getFireWallLog({
@@ -128,8 +122,6 @@ export default {
 }
 .top-child {
   display flex
-  flex-wrap nowrap
-  justify-content space-around
   margin 20px 0
 }
 .el-date-editor--datetimerange.el-input,

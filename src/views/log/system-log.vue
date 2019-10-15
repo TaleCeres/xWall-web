@@ -1,11 +1,13 @@
 <template>
   <div class='log-container'>
     <div class='top-child'>
-      <el-date-picker v-model="time" value-format="timestamp" type="datetimerange" start-placeholder="起始时间" end-placeholder="结束时间" :default-time="['12:00:00']" @change='getTime()'>
+      <el-date-picker v-model="time" 
+        value-format="yyyy/MM/dd" format="yyyy/MM/dd" type="datetimerange" 
+        start-placeholder="起始时间" end-placeholder="结束时间" :default-time="['12:00:00']">
       </el-date-picker>
-      <el-button class='btn-search' icon="el-icon-search">查找</el-button>
-      <el-button class='btn-copy' icon="el-icon-copy">备份</el-button>
-      <el-button class='btn-clear' icon="el-icon-clear">清空</el-button>
+      <el-button class='btn-search' icon="el-icon-search" @click="getSystemLog">查找</el-button>
+      <el-button class='btn-copy' icon="el-icon-copy" @click="backupSystemLog">备份</el-button>
+      <el-button class='btn-clear' icon="el-icon-clear" @click="clearSystemLog">清空</el-button>
     </div>
     <div class='middle-child'>
       <el-table :data="tableData" style="width: 100%" border :default-sort="{prop: 'date', order: 'descending'}" :header-cell-style="{'background-color':'#F2F2F2'}">
@@ -27,16 +29,12 @@ export default {
     return {
       value: '',
       time: '',
-      tableData: []
+      tableData: [],
+      from: 0,
+      end: 0
     }
   },
-  created() {
-    this.getSystemLog()
-  },
   methods: {
-    getTime() {
-      console.log(this.time)
-    },
     // 获取「系统日志」的数据列表
     async getSystemLog(from, end) {
       const systemLogList = await LogModel.getSystemLog({
@@ -49,6 +47,20 @@ export default {
     async backupSystemLog() {
       await LogModel.backupSystemLog()
     },
+    clearSystemLog() {
+      this.$confirm('此操作将永久清空系统日志, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        LogModel.clearSystemLog()
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    }
   }
 }
 </script>
@@ -59,8 +71,6 @@ export default {
 }
 .top-child {
   display flex
-  flex-wrap nowrap
-  justify-content space-around
   margin 20px 0
 }
 .el-date-editor--datetimerange.el-input,

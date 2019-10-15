@@ -8,18 +8,12 @@
             eth0,brg0
           </template>
         </el-table-column>
-        <el-table-column label="Land" prop="land">
-        </el-table-column>
-        <el-table-column prop="syn" label="Syn Flood" width="150">
-        </el-table-column>
-        <el-table-column prop="udp" label="UDP Flood" width="150">
-        </el-table-column>
-        <el-table-column prop="icmp" label="ICMP Flood" width="150">
-        </el-table-column>
-        <el-table-column prop="portscan" label="端口扫描" width="150">
-        </el-table-column>
-        <el-table-column prop="pingofdeath" label="Ping of Death" width="150">
-        </el-table-column>
+        <el-table-column label="Land" prop="land" />
+        <el-table-column prop="syn" label="Syn Flood" width="150" />
+        <el-table-column prop="udp" label="UDP Flood" width="150" />
+        <el-table-column prop="icmp" label="ICMP Flood" width="150" />
+        <el-table-column prop="portscan" label="端口扫描" width="150" />
+        <el-table-column prop="pingofdeath" label="Ping of Death" width="150" />
         <el-table-column prop="teardrop" label="Teardrop" width="150">
         </el-table-column>
         <el-table-column label="操作">
@@ -31,7 +25,9 @@
       </el-table>
     </div>
 
-    <el-dialog v-loading="loading" title="编辑" :visible.sync="dialogFormVisible">
+    <el-dialog v-loading="loading" 
+      element-loading-text="更新数据中..." element-loading-spinner="el-icon-loading"
+      title="编辑" :visible.sync="dialogFormVisible">
       <el-form :model="ddos">
         <el-form-item label="Land" label-width="200px">
           <el-switch v-model="ddos.land"></el-switch>
