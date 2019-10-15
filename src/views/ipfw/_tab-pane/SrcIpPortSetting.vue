@@ -51,6 +51,8 @@ export default {
   computed: {},
   watch: {
     dialogVisible(val, oldVal) {
+      let data = this.handleSave()
+      if (!val) this.$store.commit('sensor/SET_SRC_IP_IN_TMP_WHITE_LIST', data)
       if (val) this.initCheckState()
     },
     checkList() {}
@@ -104,8 +106,6 @@ export default {
       this.checkList = list
       this.accessList = accessList
       this.externalNodes = externalNodes
-      // 假装提交
-      this.handleSave()
     },
     handleSave() {
       let { externalNodes, checkList } = this
@@ -133,7 +133,7 @@ export default {
         }
       })
       // 提交时候的数据
-      console.log(dataArr)
+      return dataArr
     }
   },
 }
