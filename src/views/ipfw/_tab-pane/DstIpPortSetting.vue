@@ -1,6 +1,7 @@
 <template>
   <div class="dst-ip">
     <div class="ip-item">
+      {{ ports }}
       <p>tcp</p>
       <el-radio-group v-model="ports.tcp.option" class="radio">
         <el-radio label="ALL">允许所有端口</el-radio>
@@ -27,7 +28,6 @@ export default {
   components: {},
   data() {
     return {
-      tmp: '',
       ports: {
         tcp: {
           option: '',
@@ -47,9 +47,12 @@ export default {
   },
   watch: {
     dialogVisible(val, oldVal) {
-      if (!val) this.$store.commit('sensor/SET_DST_IP_IN_TMP_WHITE_LIST', this.ports)
       if (val) this.initCheckState()
     },
+    ports(val, oldVal) {
+      console.log('ports', val)
+      // this.$store.commit('sensor/SET_DST_IP_IN_TMP_WHITE_LIST', val)
+    }
   },
   created() { },
   mounted() {
@@ -67,14 +70,14 @@ export default {
           selections: udpSelections
         }
       } = this.$store.state.sensor.tmpWhitelist.accessPorts
-      this.ports.tcp = {
+      this.$set('ports', 'tcp', {
         option: tcpOption,
         selections: tcpSelections
-      }
-      this.ports.udp = {
+      })
+      this.$set('ports', 'udp', {
         option: udpOption,
         selections: udpSelections
-      }
+      })
     }
   },
 }
