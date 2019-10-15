@@ -76,20 +76,29 @@ export default {
       externalNodes.forEach((item, index) => {
         if (accessList[index]) {
           item.udpPorts = accessList[index].udpPorts
+          if (typeof item.udpPorts.selections === 'undefined') {
+            this.$set(item.udpPorts, 'selections', '')
+          }
           item.tcpPorts = accessList[index].tcpPorts
+          if (typeof item.tcpPorts.selections === 'undefined') {
+            this.$set(item.tcpPorts, 'selections', '')
+          }
           item.icmp = accessList[index].icmp
         } else {
-          item.tcpPorts = {
+          let tcpPorts = {
             option: '',
             selections: ''
           }
-          item.udpPorts = {
+          let udpPorts = {
             option: '',
             selections: ''
           }
-          item.icmp = {
+          let icmp = {
             option: ''
           }
+          this.$set(item, 'tcpPorts', tcpPorts)
+          this.$set(item, 'udpPorts', udpPorts)
+          this.$set(item, 'icmp', icmp)
         }
       })
       this.checkList = list
@@ -99,7 +108,7 @@ export default {
       this.handleSave()
     },
     handleSave() {
-      let { accessList, externalNodes, checkList } = this
+      let { externalNodes, checkList } = this
       let list = checkList.map(externalNode => externalNode.split('(')[1].slice(0, -1))
       let dataArr = []
       externalNodes.forEach(item => {
