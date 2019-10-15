@@ -61,7 +61,7 @@ export default {
       },
       rules: {
         name: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' }
+          { required: true, message: '请输入用户名', trigger: 'blur' }
         ],
         pass: [
           { required: true, validator: validatePass, trigger: 'blur' }
@@ -70,7 +70,7 @@ export default {
           { required: true, validator: validatePass2, trigger: 'blur' }
         ],
         authority: [
-          { required: true, message: '请选择活动区域', trigger: 'change' }
+          { required: true, message: '请选择用户权限', trigger: 'change' }
         ]
       },
     }
@@ -123,6 +123,7 @@ export default {
 <style lang="stylus">
 .user-container {
   margin 30px
+  max-width 700px
 }
 .el-form-item__label {
   text-align center

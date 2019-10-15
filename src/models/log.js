@@ -9,7 +9,7 @@ function processSystemLogList(list) {
   return list.map(item => {
     let [time, event] = item.split('[info]:').map(el => el.trim())
     return {
-      time, 
+      time,
       event
     }
   })
@@ -38,7 +38,7 @@ export default class Log {
     const reqBody = {
       start,
       end,
-      from: (page - 1) * size, // 跳过数据量(跳过几条数据)
+      from: page * size, // 跳过数据量(跳过几条数据)
       size,
       esQuery: {
         bool: {
@@ -53,38 +53,38 @@ export default class Log {
     if (dstIp) {
       reqBody.esQuery.bool.must.push({ term: { dstIp } })
     }
-    // const data = await post('xFocus/api/history/events', reqBody)
-    // return data
-    return {
-      'data': {
-        'total': 399,
-        'records': [
-          {
-            'message': '[SNORTIDS[LOG]: [sensor-eth0] ]', // 时间详细信息
-            '@version': '1', // 无
-            '@timestamp': '2019-09-16T03:44:44.000Z', // 无
-            'type': 'syslog', // 事件类型
-            'host': '192.168.1.149', // 无
-            'probe': 'sensor', // 无
-            'iface': 'eth0', // 无
-            'signatureId': '10002', // 无
-            'protocolNumber': '6', // 无
-            'srcIp': '192.168.1.12', // 源IP
-            'dstIp': '192.168.1.182', // 目标IP
-            'srcPort': '48524', // 源端口
-            'dstPort': '1237', // 目标端口
-            'packetLength': '44', // 无
-            'payload': '4500002CBFDF00002E0648DAC0A8010CC0A801B6BD8C04D5D0C0B6CB0000000060020C00BE250000020405B4', // 有效载荷
-            'receivedAt': '2019-09-20T06:39:53.272Z', // 日志产生时间
-            'receivedFrom': '192.168.1.149', // 无
-            'protocolName': 'TCP' // 协议名
-          }
-        ]
-      }
-    }
+    const data = await post('xFocus/api/history/events', reqBody)
+    return data
+    // return {
+    //   'data': {
+    //     'total': 399,
+    //     'records': [
+    //       {
+    //         'message': '[SNORTIDS[LOG]: [sensor-eth0] ]', // 时间详细信息
+    //         '@version': '1', // 无
+    //         '@timestamp': '2019-09-16T03:44:44.000Z', // 无
+    //         'type': 'syslog', // 事件类型
+    //         'host': '192.168.1.149', // 无
+    //         'probe': 'sensor', // 无
+    //         'iface': 'eth0', // 无
+    //         'signatureId': '10002', // 无
+    //         'protocolNumber': '6', // 无
+    //         'srcIp': '192.168.1.12', // 源IP
+    //         'dstIp': '192.168.1.182', // 目标IP
+    //         'srcPort': '48524', // 源端口
+    //         'dstPort': '1237', // 目标端口
+    //         'packetLength': '44', // 无
+    //         'payload': '4500002CBFDF00002E0648DAC0A8010CC0A801B6BD8C04D5D0C0B6CB0000000060020C00BE250000020405B4', // 有效载荷
+    //         'receivedAt': '2019-09-20T06:39:53.272Z', // 日志产生时间
+    //         'receivedFrom': '192.168.1.149', // 无
+    //         'protocolName': 'TCP' // 协议名
+    //       }
+    //     ]
+    //   }
+    // }
   }
 
-  
+
   /**
    * 获取某个区间段内的系统日志
    * @static
@@ -98,22 +98,21 @@ export default class Log {
               }
             ]
    */
-  static async getSystemLog(from, end) {
-    // const data = await post('configCentre/api/events', {
-    //   from,
-    //   end
-    // })
-    const data = [
-      '2019/9/26 4:19:23 PM [info]: Express server listening on port 3001',
-      '2019/9/30 1:29:29 PM [info]: Express server listening on port 3001'
-    ]
+  static async getSystemLog({ from, end }) {
+    const data = await post('configCentre/api/log', {
+      from,
+      end
+    })
+    console.log('data', data)
+    // const data = [
+    //   '2019/9/26 4:19:23 PM [info]: Express server listening on port 3001',
+    //   '2019/9/30 1:29:29 PM [info]: Express server listening on port 3001'
+    // ]
     return processSystemLogList(data)
   }
 
   static async backupSystemLog() {
-    // const result = await put('configCentre/api/log')
-    return {
-      msg: 'remove Log: complete'
-    }
+    const result = await put('configCentre/api/log')
+    return result
   }
 }
