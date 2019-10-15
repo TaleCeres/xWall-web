@@ -2,7 +2,12 @@
 /* eslint-disable */
 const state = {
   ctx: {
-    mode: ''
+    name: '',
+    mode: '',
+    ip: '',
+    netmask: '',
+    mac: '',
+    serialNumber: ''
   }, // 防火墙内容对象
   tmpWhitelist: {
     enabled: false,
@@ -63,7 +68,6 @@ const mutations = {
   },
   SET_MODE(state, mode) {
     state.ctx.mode = mode
-    console.log('state.ctx', state.ctx)
   },
   // 初始化IP配置
   INIT_TMP_WHITE_LIST(state, index) {
