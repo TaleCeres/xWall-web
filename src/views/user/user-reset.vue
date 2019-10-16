@@ -2,7 +2,7 @@
   <div v-loading.fullscreen.lock="loading" class='user-container'>
     <el-form ref="ruleForm" :model="ruleForm" status-icon :rules="rules" label-width="200px" class="user-ruleForm">
       <el-form-item label="用户名" prop="name">
-        <el-input v-model="ruleForm.name"></el-input>
+        <el-input v-model="ruleForm.name" disabled></el-input>
       </el-form-item>
       <el-form-item label="新密码" prop="pass">
         <el-input v-model="ruleForm.pass" type='password' autocomplete='off' placeholder='密码最小长度8位 字母+数字'></el-input>

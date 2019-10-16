@@ -14,7 +14,7 @@ export default {
       path: '/ddos/index',
       component: _import('ddos/index'),
       name: 'DDOSIndex',
-      meta: { title: '抗DDOS设置', icon: 'fa fa-cog' },
+      meta: { title: '抗DDOS设置', icon: 'fa fa-sliders' },
     },
   ],
 }

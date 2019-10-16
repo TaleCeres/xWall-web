@@ -109,7 +109,7 @@ export default {
       histogramData: [], // 最近事件分布图
       topsl4: [],
       topsl7: [],
-      socket: io('http://192.168.1.149:3010'),
+      socket: io('http://192.168.3.89:8081'),
       cpuData: [],
       cpuDate: [],
       memData: [],

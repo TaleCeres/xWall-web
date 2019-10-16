@@ -14,7 +14,7 @@ export default {
       path: '/ipfw/index',
       component: _import('ipfw/index'),
       name: 'ipfwIndex',
-      meta: { title: 'IP层规则', icon: 'fa fa-cog' },
+      meta: { title: 'IP层规则', icon: 'el-icon-set-up' },
     },
   ],
 }
