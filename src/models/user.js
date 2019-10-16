@@ -17,7 +17,15 @@ export default class User {
       username,
       password
     })
-    saveToken(data.token)
+    if (data.token) {
+      saveToken(data.token)
+    }
+
+    return data
+  }
+
+  static async getUserInfo() {
+    const data = await get('configCentre/login')
     return data
   }
 
@@ -39,7 +47,7 @@ export default class User {
   // 创建用户
   static async createUser(username, password, role) {
     console.log(username, password, role)
-    const data = await post('/api/user', {
+    const data = await post('configCentre/api/user', {
       username, password, role
     })
     return data
@@ -54,7 +62,7 @@ export default class User {
   // 修改用户(目前只能修改密码)
   static async updateUser(username, password) {
     const data = await post('configCentre/api/user/password', {
-      username, 
+      username,
       password
     })
     return data

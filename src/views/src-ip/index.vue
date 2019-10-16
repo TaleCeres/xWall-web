@@ -1,6 +1,6 @@
 <template>
   <div class="src-ip">
-    <div class="title">源IP</div>
+    <div class="title">源IP设置</div>
     <div class="table-box">
       <el-table border size="medium" header-row-class-nam="table-title" cell-class-name='table-cell' :data="externalNodes" style="width: 100%">
         <el-table-column label="名称" prop="name" />
@@ -19,7 +19,9 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog v-loading="loading" title="编辑源IP" :visible.sync="dialogVisible">
+    <el-dialog v-loading="loading" 
+      element-loading-text="更新数据中..." element-loading-spinner="el-icon-loading"
+      title="编辑源IP" :visible.sync="dialogVisible">
       <el-form :model="srcIp">
         <el-form-item label="名称" label-width="200">
           <el-input v-model="srcIp.name" autocomplete="off"></el-input>

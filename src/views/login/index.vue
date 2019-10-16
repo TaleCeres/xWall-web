@@ -24,7 +24,7 @@
             </el-form-item>
           </el-form>
 
-          <el-button style="width: 100%" type="primary">登录</el-button>
+          <el-button v-loading="loading" style="width: 100%" type="primary" @click="handleLogin">登录</el-button>
         </div>
       </div>
     </div>
@@ -41,8 +41,8 @@ export default {
     return {
       loading: false, // 加载动画
       form: {
-        username: '999@qq.com',
-        password: '123456',
+        username: 'support@gushenxing.com',
+        password: 'gushenxing123',
       },
     }
   },
@@ -59,10 +59,15 @@ export default {
       const { username: account, password: secret } = this.form
       this.loading = true
       try {
-        await UserModel.getToken(account, secret)
-        await this.assignUserInfo()
+        const user = await UserModel.getToken(account, secret)
         this.loading = false
-        this.$router.push('/admin')
+        if (user.username) {
+          this.setUser(user)
+        }
+        this.$router.push({
+          path: '/'
+        })
+
         // this.$message.success('登录成功')
       } catch (e) {
         this.loading = false

@@ -126,7 +126,6 @@ export default class System {
   static async getTopsl7() {
     const data = await get('configCentre/api/flow/topsl7')
     const { aggregations } = data.data
-    console.log(aggregations)
     const buckets = aggregations.l7proto.buckets.map(item => ({
       name: item.key,
       value: item.bytes_sum.value

@@ -1,6 +1,6 @@
 <template>
   <div class="ipfw">
-    <div class="title">DDOS</div>
+    <div class="title">IP规则</div>
     <div class="table-box">
       <el-table border size="medium" header-row-class-nam="table-title" cell-class-name='table-cell' :data="list" style="width: 100%">
         <el-table-column label="名称" prop="name" />

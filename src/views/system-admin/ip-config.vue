@@ -5,7 +5,7 @@
         <el-input v-model="ruleForm.ip"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button class="btn-submit" @click="submitForm('ruleForm')">提交</el-button>
+        <el-button v-loading="loading" class="btn-submit" @click="submitForm('ruleForm')">提交</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -18,6 +18,7 @@ export default {
   name: 'IPConfig',
   data() {
     return {
+      loading: false,
       ruleForm: {
         ip: ''
       },
@@ -32,17 +33,18 @@ export default {
   },
   methods: {
     submitForm(formName) {
+      this.loading = true
       this.$refs[formName].validate(valid => {
         if (valid) {
-          console.log('submit!')
-          SystemAdmin.setIpOfCenter(this.ruleForm.ip).then(res => {
-            if (res.data === 'success') {
-              this.$notify({
-                title: '成功',
-                message: '提交成功',
-                type: 'success'
-              })
-            }
+          SystemAdmin.setIpOfCenter(Object.assign(this.$store.state.sensor.ctx, {
+            remoteIp: this.ruleForm.ip
+          })).then(res => {
+            this.loading = false
+            this.$notify({
+              title: '成功',
+              message: '管理中心IP设置成功',
+              type: 'success'
+            })
           })
         } else {
           return false
