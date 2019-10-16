@@ -1,7 +1,6 @@
 <template>
   <div class="dst-ip">
     <div class="ip-item">
-      {{ ports }}
       <p>tcp</p>
       <el-radio-group v-model="ports.tcp.option" class="radio">
         <el-radio label="ALL">允许所有端口</el-radio>
