@@ -111,7 +111,6 @@ export default {
   margin 30px
   max-width 700px
 }
-
 .el-form-item__label {
   text-align center
   border-radius 4px

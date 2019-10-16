@@ -6,12 +6,6 @@
 	xWall 工业防火墙 2.0
 </h4>
 
-## 参考
-[旧版 xWall](https://192.168.1.206/index.php), 基于PHP，并使用iframe
-[工业防火墙系统](http://192.168.1.124:3001)，基于Angular1.0
-[lin-cms-vue](https://github.com/TaleLin/lin-cms-vue) -- [线上项目](http://face.cms.7yue.pro/#/about)
-[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) -- [线上项目](https://panjiachen.github.io/vue-element-admin/#/dashboard)
-
 ## 项目启动
 
 ```
@@ -48,8 +42,6 @@ npm run commit # 提交至「本地仓库」，结合 npm scripts自动运行 co
 
 页面组件可能包含多个业务组件，业务组件包含多个基础组件
 
-## 可视化
-参考[个人作品:GraphVis](http://www.graphvis.cn/graphvis/university/index.html)
 
 ## 项目目录结构
 ```
