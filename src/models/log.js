@@ -2,6 +2,7 @@ import {
   post,
   get,
   put,
+  _delete
 } from '@/utils/request'
 
 
@@ -113,6 +114,11 @@ export default class Log {
 
   static async backupSystemLog() {
     const result = await put('configCentre/api/log')
+    return result
+  }
+
+  static async clearSystemLog() {
+    const result = await _delete('configCentre/api/log')
     return result
   }
 }
