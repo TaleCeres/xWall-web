@@ -1,6 +1,6 @@
 <template>
-  <div v-loading.fullscreen.lock="loading" class='user-container'>
-    <el-table v-if='dataList.length>0' :data='dataList' border :header-cell-style="{'background-color':'#F2F2F2'}">
+  <div class='user-container'>
+    <el-table v-if="auth==='admin'" :data='dataList' border :header-cell-style="{'background-color':'#F2F2F2'}">
       <el-table-column prop='username' label='用户名' />
       <el-table-column prop='role' label='权限'>
         <template slot-scope="scope">
@@ -39,7 +39,7 @@ export default {
       'auth'
     ])
   },
-  created() {
+  mounted() {
     this.getUser()
   },
   methods: {

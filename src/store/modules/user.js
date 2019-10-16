@@ -26,7 +26,6 @@ const mutations = {
 const actions = {
   setUser({ commit }, user) {
     commit('SET_LOGINED', true)
-
     let { username, role: auth } = user
     commit('SET_USERNAME', username)
     commit('SET_USER_AUTH', auth)
