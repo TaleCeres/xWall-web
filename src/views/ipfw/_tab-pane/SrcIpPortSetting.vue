@@ -1,5 +1,6 @@
 <template>
   <div class="src-ip">
+    {{ arrayData }}
     <el-checkbox-group v-model="checkList">
       <div v-for="item in externalNodes" :key="item.ip" class="item">
         <el-checkbox :label="item.name+'('+item.ip+')'" :value="item.value" style="font-size: 17px">
@@ -31,7 +32,7 @@
         </div>
       </div>
     </el-checkbox-group>
-
+    <el-button type="primary" @click="handleSave()" size="mini" style="margin-left: 200px">保存设置</el-button>
   </div>
 </template>
 
@@ -45,17 +46,53 @@ export default {
       accessList: [],
       checkList: [],
       tcpRadio: false,
-      udpRadio: false
+      udpRadio: false,
     }
   },
-  computed: {},
+  computed: {
+    dialogVisible() {
+      return this.$store.state.sensor.dDosdialogVisible
+    },
+    arrayData() {
+      let { externalNodes, checkList } = this
+      let list = checkList.map(externalNode => externalNode.split('(')[1].slice(0, -1))
+      let dataArr = []
+      externalNodes.forEach(item => {
+        if (list.includes(item.ip)) {
+          let data = {
+            ip: item.ip,
+            name: item.name,
+            icmp: item.icmp,
+            selected: true
+          }
+          if (item.tcpPorts.option === 'SELECTED') {
+            data.tcpPorts = item.tcpPorts
+          } else {
+            data.tcpPorts = { option: item.tcpPorts.option }
+          }
+          if (item.udpPorts.option === 'SELECTED') {
+            data.udpPorts = item.udpPorts
+          } else {
+            data.udpPorts = { option: item.udpPorts.option }
+          }
+          dataArr.push(data)
+        }
+      })
+      // 提交时候的数据
+      // console.log('endData', dataArr)
+      return dataArr
+    }
+  },
   watch: {
     dialogVisible(val, oldVal) {
-      let data = this.handleSave()
-      if (!val) this.$store.commit('sensor/SET_SRC_IP_IN_TMP_WHITE_LIST', data)
       if (val) this.initCheckState()
     },
-    checkList() {}
+    // externalNodes() {
+    //   this.initData()
+    // },
+    // checkList() {
+    //   this.initData()
+    // }
   },
   created() {
   },
@@ -108,32 +145,7 @@ export default {
       this.externalNodes = externalNodes
     },
     handleSave() {
-      let { externalNodes, checkList } = this
-      let list = checkList.map(externalNode => externalNode.split('(')[1].slice(0, -1))
-      let dataArr = []
-      externalNodes.forEach(item => {
-        if (list.includes(item.ip)) {
-          let data = {
-            ip: item.ip,
-            name: item.name,
-            icmp: item.icmp,
-            selected: true
-          }
-          if (item.tcpPorts.option === 'SELECTED') {
-            data.tcpPorts = item.tcpPorts
-          } else {
-            data.tcpPorts = { option: item.tcpPorts.option }
-          }
-          if (item.udpPorts.option === 'SELECTED') {
-            data.udpPorts = item.udpPorts
-          } else {
-            data.udpPorts = { option: item.udpPorts.option }
-          }
-          dataArr.push(data)
-        }
-      })
-      // 提交时候的数据
-      return dataArr
+      this.$store.commit('sensor/SET_SRC_IP_IN_TMP_WHITE_LIST', this.arrayData)
     }
   },
 }

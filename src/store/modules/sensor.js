@@ -79,6 +79,7 @@ const mutations = {
   // 设置协议
   SET_SRC_IP_IN_TMP_WHITE_LIST(state, obj) {
     state.tmpWhitelist.accessList = obj
+    // console.log('vuex', state.tmpWhitelist.accessList)
   },
   SET_DST_IP_IN_TMP_WHITE_LIST(state, obj) {
     state.tmpWhitelist.accessPorts = obj
